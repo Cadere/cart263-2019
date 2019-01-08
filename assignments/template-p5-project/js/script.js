@@ -22,8 +22,17 @@ let food = {
   x: 0,
   y: 0,
   size: 32,
-  color: "#55cccc"
+  color: "#55cccc",
+  vy:0,
+  vx:0,
+  maxSpeed: 10,
+  minSpeed: 1,
+  speed:5,
+  angle:0,
+  noiseValue:0.1,
 }
+
+
 
 // preload()
 //
@@ -40,7 +49,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
-  foodPosition();
+  initializeFood();
   noCursor();
 
 }
@@ -100,21 +109,24 @@ function displayAvatar(){
   pop();
 }
 
-//foodPosition();
+//initializeFood();
 //
 //Attributes a random position to the food item
-function foodPosition(){
+function initializeFood(){
   food.x = random(0,width);
   food.y = random(0,height);
+  food.angle = random(0,TWO_PI);
+  food.speed = food.maxSpeed;
 }
 
 //updateFood();
 //
-//calls foodPosition() if eating() is true
+//calls initializeFood() if eating() is true
 function updateFood(){
   if(eating()){
-    foodPosition();
+    initializeFood();
   }
+  moveFood();
 }
 
 //diplayFood()
@@ -139,4 +151,44 @@ function eating(){
   else {
     return false;
   }
+}
+
+//moveFood();
+//
+//updates the food position
+function moveFood(){
+  randomizeFood();
+  //calculate velocity
+  food.vx = food.speed*cos(food.angle);
+  food.vy = food.speed*sin(food.angle);
+  // Update position with velocity
+  food.x += food.vx;
+  food.y += food.vy;
+  // Constrain y position to be on screen
+  food.y = constrain(food.y,0,height);
+  food.x = constrain(food.x,0,width);
+  foodBounce();
+}
+
+//foodBounce()
+//
+// checks if the food has has touched the edges of the screen and if yes
+//reverts the angle so that the food bounces off the edge
+function foodBounce(){
+  // Check for touching upper or lower edge and reverse velocity if so
+  if (food.y === 0 || food.y  === height) {
+    food.angle = -food.angle;
+  }
+  if (food.x === 0 || food.x === width) {
+    food.angle += PI;
+  }
+}
+
+//randomizeFood()
+//
+//this function randomizes the value of the food's speed and angle
+function randomizeFood(){
+  food.speed = map(noise(food.noiseValue), 0, 1, food.minSpeed, food.maxSpeed);
+  food.angle += map(noise(food.noiseValue), 0, 1, -PI/8, PI/8);
+  food.noiseValue += 0.1;
 }
