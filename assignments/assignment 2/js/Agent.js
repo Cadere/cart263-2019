@@ -1,0 +1,20 @@
+class Agent{
+  constructor (x,y,size,color) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.color = color;
+    this.active = true;
+  }
+
+  display(){
+    if(this.active){
+      push();
+      noStroke();
+      fill(this.color);
+      ellipse(this.x,this.y,this.size);
+      pop();
+    }
+  }
+  
+}

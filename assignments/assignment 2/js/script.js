@@ -10,6 +10,8 @@ author, and this description to match your project!
 
 ******************/
 
+let avatar;
+
 // preload()
 //
 // Description of preload
@@ -24,7 +26,9 @@ function preload() {
 // Description of setup
 
 function setup() {
+  createCanvas(windowWidth,windowHeight);
 
+  avatar = new Avatar(mouseX,mouseY,64,255,64);
 }
 
 
@@ -33,5 +37,7 @@ function setup() {
 // Description of draw()
 
 function draw() {
-
+  background(0);
+  avatar.update();
+  avatar.display();
 }
