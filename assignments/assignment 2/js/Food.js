@@ -9,7 +9,7 @@ class Food extends Agent {
     this.minSpeed = 1;
     this.speed =5;
     this.angle =0;
-    this.noiseValue =0.1;
+    this.noiseValue = random (0.01,0.2);
   }
 
   reset(){

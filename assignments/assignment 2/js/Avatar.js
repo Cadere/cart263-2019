@@ -2,7 +2,7 @@ class Avatar extends Agent {
   constructor (x,y,size,color,maxSize){
     super(x,y,size,color);
     this.maxSize = maxSize;
-    this.sizeLoss = 1;
+    this.sizeLoss = 0.5;
   }
 
   update (){
