@@ -14,9 +14,20 @@ class Avatar extends Agent {
     this.y = mouseY;
 
     this.size = this.size - this.sizeLoss;
-    constrain(this.size, 0, this.maxSize);
+    this.size = constrain(this.size, 0, this.maxSize);
     if(this.size === 0){
       this.active = false;
+    }
+  }
+
+  eating(agent){
+    if(!this.active){
+      return;
+    }
+
+    if(this.overlap(agent)){
+      this.size = constrain(this.size+agent.size,0,this.maxSize);
+      agent.reset();
     }
   }
 

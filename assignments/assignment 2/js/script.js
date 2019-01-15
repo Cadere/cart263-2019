@@ -11,6 +11,7 @@ author, and this description to match your project!
 ******************/
 
 let avatar;
+let food;
 
 // preload()
 //
@@ -28,7 +29,8 @@ function preload() {
 function setup() {
   createCanvas(windowWidth,windowHeight);
 
-  avatar = new Avatar(mouseX,mouseY,64,255,64);
+  avatar = new Avatar(mouseX,mouseY,64,0,64);
+  food = new Food(random(width),random(height),64,150,16,64);
 }
 
 
@@ -37,7 +39,9 @@ function setup() {
 // Description of draw()
 
 function draw() {
-  background(0);
+  background(255);
   avatar.update();
+  avatar.eating(food);
   avatar.display();
+  food.display();
 }
