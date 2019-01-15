@@ -41,6 +41,7 @@ function setup() {
 function draw() {
   background(255);
   avatar.update();
+  food.update();
   avatar.eating(food);
   avatar.display();
   food.display();
