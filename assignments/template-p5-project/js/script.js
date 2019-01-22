@@ -10,28 +10,28 @@ author, and this description to match your project!
 
 ******************/
 
-// preload()
-//
-// Description of preload
+$(document).ready(setup);
 
-function preload() {
-
+function setup(){
+  setInterval(update,500);
+  $('span').on('click',spanClicked);
 }
 
-
-// setup()
-//
-// Description of setup
-
-function setup() {
-
+function update(){
+  console.log("update!");
+  $('span').each(updateSpan);
 }
 
+function updateSpan(){
+  console.log("update span!")
+  let probability = Math.random();
+  if (probability < 0.1){
+    $(this).removeClass("redacted");
+    $(this).addClass("revealed");
+  }
+}
 
-// draw()
-//
-// Description of draw()
-
-function draw() {
-
+function spanClicked(){
+  $(this).removeClass("revealed");
+  $(this).addClass("redacted");
 }
