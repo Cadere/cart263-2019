@@ -19,3 +19,13 @@ div {
   background-color: transparent;
   color: red;
 }
+
+.secret {
+  background-color: transparent;
+  color: black;
+}
+
+.found {
+  background-color: red;
+  color: white;
+}

@@ -9,17 +9,23 @@ This is a template. You must fill in the title,
 author, and this description to match your project!
 
 ******************/
+let confidential;
+let mystery;
+let secretsFound = 0;
 
 $(document).ready(setup);
 
 function setup(){
   setInterval(update,500);
-  $('span').on('click',spanClicked);
+  confidential = $('.redacted');
+  mystery = $('.secret');
+  confidential.on('click',spanClicked);
+  mystery.mouseover(mysterySeen);
 }
 
 function update(){
   console.log("update!");
-  $('span').each(updateSpan);
+  confidential.each(updateSpan);
 }
 
 function updateSpan(){
@@ -34,4 +40,13 @@ function updateSpan(){
 function spanClicked(){
   $(this).removeClass("revealed");
   $(this).addClass("redacted");
+}
+
+function mysterySeen(){
+  $(this).removeClass("secret");
+  $(this).addClass("found");
+  $(this).off();
+  secretsFound ++;
+  console.log(secretsFound);
+  $("#secretCount").text(secretsFound);
 }
