@@ -13,23 +13,19 @@ let confidential;
 let mystery;
 let secretsFound = 0;
 
-$(document).ready(setup);
-
-function setup(){
+$(document).ready(function(){
   setInterval(update,500);
   confidential = $('.redacted');
   mystery = $('.secret');
   confidential.on('click',spanClicked);
-  mystery.mouseover(mysterySeen);
-}
+  mystery.on('mouseover',mysterySeen);
+});
 
 function update(){
-  console.log("update!");
   confidential.each(updateSpan);
 }
 
 function updateSpan(){
-  console.log("update span!")
   let probability = Math.random();
   if (probability < 0.1){
     $(this).removeClass("redacted");
@@ -45,8 +41,7 @@ function spanClicked(){
 function mysterySeen(){
   $(this).removeClass("secret");
   $(this).addClass("found");
-  $(this).off();
+  $(this).off('mouseover');
   secretsFound ++;
-  console.log(secretsFound);
   $("#secretCount").text(secretsFound);
 }
