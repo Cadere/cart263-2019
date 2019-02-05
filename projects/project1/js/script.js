@@ -10,6 +10,10 @@ author, and this description to match your project!
 let $box;
 let $apple;
 let $machine;
+let $moneyBar;
+let $moneyLabel;
+let $hungerBar;
+let $hungerLabel;
 let resetApple;
 let moneyValue = 0;
 
@@ -19,12 +23,18 @@ function setup(){
   $box = $('#box');
   $machine = $('#machine');
   $apple = $('#apple');
+  $moneyBar = $( "#progressbar" ),
+  $moneyLabel = $( ".progress-label" );
 
-  $( function() {
-    $( "#progressbar" ).progressbar({
-      value: moneyValue
+  $moneyBar.progressbar({
+      value: moneyValue,
+      change: function() {
+        $moneyLabel.text( $moneyBar.progressbar( "value" ) + "$" );
+      },
+      complete: function() {
+        progressLabel.text( "Complete!" );
+      }
     });
-  } );
 
   $box.offset({
     top: 200,

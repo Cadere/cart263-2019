@@ -19,3 +19,13 @@ This is the style file for this project.
   position: absolute;
   pointer-events: none;
 }
+
+.ui-progressbar {
+  position: relative;
+}
+.progress-label {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  font-weight: bold;
+}
