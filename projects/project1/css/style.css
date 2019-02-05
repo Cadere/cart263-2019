@@ -3,3 +3,12 @@
 This is the style file for this project.
 
 **********************************************/
+#box {
+  width: 200px;
+  height: auto;
+}
+
+#apple {
+  width: 100px;
+  height: auto;
+}

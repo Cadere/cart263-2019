@@ -16,8 +16,20 @@ function setup(){
   $box = $('#box');
   $apple = $('#apple');
 
+  $box.offset({
+    top: 200,
+    left:0
+  })
+
+  $apple.offset({
+    top: 300,
+    left: 500
+  })
+
+  $apple.animate({ "left": "-=200px" }, 1500 )
+
   $apple.draggable();
-  $mouth.droppable({
+  $box.droppable({
     drop: appleDropped
   });
 }
