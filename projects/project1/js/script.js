@@ -9,11 +9,13 @@ author, and this description to match your project!
 ******************/
 let $box;
 let $apple;
+let $machine;
 
 $(document).ready(setup);
 
 function setup(){
   $box = $('#box');
+  $machine = $('#machine');
   $apple = $('#apple');
 
   $box.offset({
@@ -21,12 +23,17 @@ function setup(){
     left:0
   })
 
-  $apple.offset({
-    top: 300,
-    left: 500
+  $machine.offset({
+    top: 250,
+    left: 250
   })
 
-  $apple.animate({ "left": "-=200px" }, 1500 )
+  $apple.offset({
+    top: 300,
+    left: 700
+  })
+
+  $apple.animate({ "left": "-=400px" }, 2500 )
 
   $apple.draggable();
   $box.droppable({

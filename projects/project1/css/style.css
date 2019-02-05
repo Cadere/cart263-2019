@@ -4,11 +4,18 @@ This is the style file for this project.
 
 **********************************************/
 #box {
+  position: absolute;
   width: 200px;
   height: auto;
 }
 
 #apple {
+  position: absolute;
   width: 100px;
   height: auto;
+}
+
+#machine {
+  position: absolute;
+  pointer-events: none;
 }
