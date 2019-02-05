@@ -10,6 +10,8 @@ author, and this description to match your project!
 let $box;
 let $apple;
 let $machine;
+let resetApple;
+let moneyValue = 0;
 
 $(document).ready(setup);
 
@@ -17,6 +19,12 @@ function setup(){
   $box = $('#box');
   $machine = $('#machine');
   $apple = $('#apple');
+
+  $( function() {
+    $( "#progressbar" ).progressbar({
+      value: moneyValue
+    });
+  } );
 
   $box.offset({
     top: 200,
@@ -33,7 +41,7 @@ function setup(){
     left: 700
   })
 
-  $apple.animate({ "left": "-=400px" }, 2500 )
+  $apple.animate({ "left": "-=400px" }, 2500 );
 
   $apple.draggable();
   $box.droppable({
@@ -42,15 +50,19 @@ function setup(){
 }
 
 function appleDropped(event,ui) {
-  ui.draggable.remove();
-  // setInterval(chew, 200)
+  ui.draggable.hide();
+  resetApple = setInterval(newApple, 200);
+  moneyValue ++;
+  console.log(moneyValue);
+  $( "#progressbar" ).progressbar( "value", moneyValue);
 }
 
-// function chew(){
-//   if($box.attr('src') === 'assets/images/box-open.png'){
-//     $box.attr('src','assets/images/box-closed.png')
-//   }
-//   else{
-//     $box.attr('src','assets/images/box-open.png')
-//   }
-// }
+function newApple(){
+  $apple.css({
+    top: 300,
+    left: 700
+  });
+  $apple.show();
+  $apple.animate({"left": "-=400px"}, 2500);
+  clearInterval(resetApple);
+}
