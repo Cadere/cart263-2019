@@ -15,8 +15,8 @@ let $moneyLabel;
 let $hungerBar;
 let $hungerLabel;
 let resetApple;
-let moneyValue = 1;
-let hunger = 1;
+let moneyValue = 0;
+let hunger = 0;
 
 $(document).ready(setup);
 
@@ -46,11 +46,10 @@ function setup(){
       $hungerLabel.text("Hunger");
     },
     complete: function() {
-      let hungerbarValue = $( ".ui-hungerbar-value" );
       $hungerLabel.text( "HUNGER!!!!" );
-      hungerbarValue.css({"background": '#ff5e69'});
     }
   });
+
 
   $box.offset({
     top: 200,
@@ -76,13 +75,18 @@ function setup(){
   $hungerBar.droppable({
     drop: barDropped
   })
+  $hungerBar.on( "progressbarcomplete", function( event, ui ) {
+    $("body").css("background-color","red");
+    $hungerBar.effect("shake", ["down","left"])
+    $box.droppable('disable');
+  } );
 }
 
 function appleDropped(event,ui) {
   ui.draggable.hide();
   resetApple = setInterval(newApple, 200);
   moneyValue ++;
-  hunger += 10;
+  hunger += 50;
   $( "#moneybar" ).progressbar( "value", moneyValue);
   $( "#hungerbar" ).progressbar( "value", hunger);
 }
@@ -104,4 +108,6 @@ function barDropped(event,ui){
   hunger = 0;
   $("#moneybar").progressbar("value",moneyValue);
   $("#hungerbar").progressbar("value",hunger);
+  $("body").css("background-color","white");
+  $box.droppable('enable');
 }
