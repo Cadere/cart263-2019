@@ -15,7 +15,8 @@ let $moneyLabel;
 let $hungerBar;
 let $hungerLabel;
 let resetApple;
-let moneyValue = 0;
+let moneyValue = 1;
+let hunger = 1;
 
 $(document).ready(setup);
 
@@ -23,18 +24,33 @@ function setup(){
   $box = $('#box');
   $machine = $('#machine');
   $apple = $('#apple');
-  $moneyBar = $( "#progressbar" ),
-  $moneyLabel = $( ".progress-label" );
+  $moneyBar = $( "#moneybar" ),
+  $moneyLabel = $( ".money-label" );
+  $hungerBar = $("#hungerbar");
+  $hungerLabel = $(".hunger-label");
 
   $moneyBar.progressbar({
-      value: moneyValue,
-      change: function() {
-        $moneyLabel.text( $moneyBar.progressbar( "value" ) + "$" );
-      },
-      complete: function() {
-        progressLabel.text( "Complete!" );
-      }
-    });
+    value: moneyValue,
+    change: function() {
+      $moneyLabel.text("Money needed to leave");
+    },
+    complete: function() {
+      moneyLabel.text( "Complete!" );
+    }
+  });
+
+  $hungerBar.progressbar({
+    value: hunger,
+    change: function() {
+      console.log("hunger");
+      $hungerLabel.text("Hunger");
+    },
+    complete: function() {
+      let hungerbarValue = $( ".ui-hungerbar-value" );
+      $hungerLabel.text( "HUNGER!!!!" );
+      hungerbarValue.css({"background": '#ff5e69'});
+    }
+  });
 
   $box.offset({
     top: 200,
@@ -57,14 +73,18 @@ function setup(){
   $box.droppable({
     drop: appleDropped
   });
+  $hungerBar.droppable({
+    drop: barDropped
+  })
 }
 
 function appleDropped(event,ui) {
   ui.draggable.hide();
   resetApple = setInterval(newApple, 200);
   moneyValue ++;
-  console.log(moneyValue);
-  $( "#progressbar" ).progressbar( "value", moneyValue);
+  hunger += 10;
+  $( "#moneybar" ).progressbar( "value", moneyValue);
+  $( "#hungerbar" ).progressbar( "value", hunger);
 }
 
 function newApple(){
@@ -75,4 +95,13 @@ function newApple(){
   $apple.show();
   $apple.animate({"left": "-=400px"}, 2500);
   clearInterval(resetApple);
+}
+
+function barDropped(event,ui){
+  ui.draggable.hide();
+  resetApple = setInterval(newApple,200);
+  moneyValue = 0;
+  hunger = 0;
+  $("#moneybar").progressbar("value",moneyValue);
+  $("#hungerbar").progressbar("value",hunger);
 }

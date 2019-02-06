@@ -20,12 +20,25 @@ This is the style file for this project.
   pointer-events: none;
 }
 
-.ui-progressbar {
+.ui-moneybar {
   position: relative;
 }
-.progress-label {
+.ui-hungerbar {
+  position: relative;
+}
+.money-label {
   position: absolute;
   left: 50%;
-  top: 10px;
+  top: 12px;
   font-weight: bold;
 }
+.hunger-label {
+  position: absolute;
+  left: 50%;
+  top: 50px;
+  font-weight: bold;
+}
+
+#hungerbar .ui-hungerbar-value {
+    background-color: #ccc;
+  }
