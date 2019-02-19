@@ -3,3 +3,7 @@
 This is the style file for this project.
 
 **********************************************/
+#candy {
+  width: 200px;
+  height: auto;
+}

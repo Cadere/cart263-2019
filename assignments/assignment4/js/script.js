@@ -9,6 +9,7 @@ author, and this description to match your project!
 ******************/
 let $mouth;
 let $fly;
+let $candy;
 
 let buzzSFX = new Audio("assets/sounds/buzz.mp3");
 let crunchSFX = new Audio("assets/sounds/crunch.wav");
@@ -18,8 +19,10 @@ $(document).ready(setup);
 function setup(){
   $mouth = $('#mouth');
   $fly = $('#fly');
+  $candy = $('#candy');
 
   $fly.draggable();
+  $candy.draggable();
   $mouth.droppable({
     drop: flyDropped
   });
