@@ -147,30 +147,47 @@ let animals = [
 let correctAnimal;
 let answers = [];
 const NUM_OPTIONS = 5;
+let score = 0;
+let $scoreboard;
 
 $(document).ready(function(){
   $('#starter').on('click', function(){
     $('#starter').remove();
     startGame();
     if (annyang) {
-      console.log("annyang")
       // Let's define our first command. First the text we expect, and then the function it should call
       var commands = {
-        'show tps report': function() {
-          $('#tpsreport').animate({bottom: '-100px'});
+        'I give up': function() {
+          $('.guess').each(function(){
+            if ($(this).text() === correctAnimal){
+              $(this).effect('shake');
+            }
+          })
+          score = 0;
+          updateScore();
+          setTimeout(restart, 1000);
+        },
+
+        'Say it again': function(){
+          speakAnimal(correctAnimal);
+        },
+
+        'I think it is *guess': function(guess){
+          vocalGuess(guess);
         }
-      };
+      }
+    };
 
-      // Add our commands to annyang
-      annyang.addCommands(commands);
+    // Add our commands to annyang
+    annyang.addCommands(commands);
 
-      // Start listening. You can call this here, or attach this call to an event, button, etc.
-      annyang.start();
-    }
+    // Start listening. You can call this here, or attach this call to an event, button, etc.
+    annyang.start();
   })
 });
 
 function startGame(){
+  createScoreboard();
   newRound();
 }
 
@@ -184,12 +201,15 @@ function addButton(label){
 
 function buttonClicked(){
   if ($(this).text() === correctAnimal) {
-    $('.guess').remove();
-    setTimeout(newRound,1000);
+    score++
+    updateScore();
+    restart();
   }
   else {
     speakAnimal(correctAnimal);
     $('this').effect('shake');
+    score = 0;
+    updateScore();
   }
 }
 
@@ -211,4 +231,33 @@ function speakAnimal(name) {
     pitch: Math.random()
   }
   responsiveVoice.speak(reverseName, "UK English Male", options);
+}
+
+function restart(){
+  $('.guess').remove();
+  setTimeout(newRound,1000);
+}
+
+function vocalGuess(guess){
+  if (guess === correctAnimal) {
+    score++;
+    updateScore();
+    restart();
+  }
+  else {
+    speakAnimal(correctAnimal);
+    $('.guess').effect('shake');
+    score = 0;
+    updateScore();
+  }
+}
+
+function createScoreboard(){
+  $scoreboard = $('<div class = "score"> </div>');
+  $scoreboard.text(score+ ' consecutive good answers');
+  $('body').append($scoreboard);
+}
+
+function updateScore(){
+  $scoreboard.text(score+ ' consecutive good answers')
 }
