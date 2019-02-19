@@ -10,6 +10,9 @@ author, and this description to match your project!
 let $mouth;
 let $fly;
 
+let buzzSFX = new Audio("assets/sounds/buzz.mp3");
+let crunchSFX = new Audio("assets/sounds/crunch.wav");
+
 $(document).ready(setup);
 
 function setup(){
@@ -20,16 +23,26 @@ function setup(){
   $mouth.droppable({
     drop: flyDropped
   });
+
+  buzzSFX.loop = true;
+
+  $fly.on('mousedown',function () {
+    console.log("fly.on");
+    buzzSFX.play();
+  });
 }
 
 function flyDropped(event,ui) {
   ui.draggable.remove();
-  setInterval(chew, 200)
+  setInterval(chew, 200);
+  buzzSFX.pause();
+  crunchSFX.play();
 }
 
 function chew(){
   if($mouth.attr('src') === 'assets/images/mouth-open.png'){
     $mouth.attr('src','assets/images/mouth-closed.png')
+    crunchSFX.play();
   }
   else{
     $mouth.attr('src','assets/images/mouth-open.png')
