@@ -137,15 +137,14 @@ function setup(){
   createCreature();
 }
 
+$(document).ready(function(){
+  addButton("Change");
+} )
+
 function draw(){
   background("#bfe97c");
   imageMode(CENTER);
-  // image(body[2], width/2,height/2,500,500);
-  // image(leg[7], width/2,height/2,500,500);
-  // image(arm[10], width/2,height/2,500,500);
-  // image(head[1], width/2,height/2,500,500);
   creature.display();
-  text(verb[0],width/4,height/2);
 }
 
 function createLimbs(limb, image, primary, secondary, colorword, firstword, secondword){
@@ -160,4 +159,20 @@ function createCreature(){
   leg = allLegs[Math.floor(Math.random() * allLegs.length)];
   body = allBodies[Math.floor(Math.random() * allBodies.length)];
   creature = new Creature(head, arm, leg, body);
+}
+
+function modifyCreature(){
+  head = allHeads[Math.floor(Math.random() * allHeads.length)];
+  arm = allArms[Math.floor(Math.random() * allArms.length)];
+  leg = allLegs[Math.floor(Math.random() * allLegs.length)];
+  body = allBodies[Math.floor(Math.random() * allBodies.length)];
+  creature.modify(head, arm, leg, body);
+}
+
+function addButton(label){
+  let $button = $('<div class = "guess"> </div>')
+  $button.text(label);
+  $button.button();
+  $button.on('click', modifyCreature)
+  $('body').append($button);
 }
