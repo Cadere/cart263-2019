@@ -8,15 +8,33 @@ Author Name
 This is a template. You must fill in the title,
 author, and this description to match your project!
 
-******************/``
+******************/
 //variables for the images
+let headImage = [];
+let armImage = [];
+let legImage = [];
+let bodyImage = [];
+
+//variables for the arrays of parts: images + keywords
+let allHeads = [];
+let allArms = [];
+let allLegs = [];
+let allBodies = [];
+
+//variables for the selected parts
 let head;
 let arm;
 let leg;
 let body;
 
+//variable for the creature
+let creature;
+
 //variables for the size of the Creature
 let creatureSize = 500;
+
+//a variable that contains the noun of the current protagonist with a placeholder value
+let protagonist = "hero";
 
 //arrays for the words of the little story
 let protagAdj = ["fancy", "skinny", "stocky", "silly", "witty", "clumsy", "puny", "teeny", "noisy", "funny", "cocky", "bratty"];
@@ -35,7 +53,7 @@ let verb = [
   "groaned meanly",
   "hugged the"+protagonist,
   "played with the "+protagonist,
-  "sang with the "+progtagnist,
+  "sang with the "+protagonist,
   "danced with the " + protagonist,
   "surprised the "+protagonist,
   "liked the "+protagonist
@@ -49,11 +67,10 @@ let colorWordBody = ["offered","offered","offered", "asked for", "asked for", "a
 let primaryColor = ["gold","gold","gold","green","green","green","pink","pink","pink","teal","teal","teal"];
 let secondaryColor = ["green", "pink", "teal", "gold", "pink", "teal", "gold", "green", "teal", "gold", "green", "pink"];
 
-//a variable that contains the noun of the current protagonist
-let protagonist;
+
 
 function preload(){
-  head = [
+  headImage = [
     loadImage("assets/images/h-gold-green.png"),
     loadImage("assets/images/h-gold-pink.png"),
     loadImage("assets/images/h-gold-teal.png"),
@@ -67,7 +84,7 @@ function preload(){
     loadImage("assets/images/h-teal-green.png"),
     loadImage("assets/images/h-teal-pink.png")
   ]
-  arm = [
+  armImage = [
     loadImage("assets/images/a-gold-green.png"),
     loadImage("assets/images/a-gold-pink.png"),
     loadImage("assets/images/a-gold-teal.png"),
@@ -81,7 +98,7 @@ function preload(){
     loadImage("assets/images/a-teal-green.png"),
     loadImage("assets/images/a-teal-pink.png")
   ]
-  leg = [
+  legImage = [
     loadImage("assets/images/l-gold-green.png"),
     loadImage("assets/images/l-gold-pink.png"),
     loadImage("assets/images/l-gold-teal.png"),
@@ -95,7 +112,7 @@ function preload(){
     loadImage("assets/images/l-teal-green.png"),
     loadImage("assets/images/l-teal-pink.png")
   ]
-  body = [
+  bodyImage = [
     loadImage("assets/images/b-gold-green.png"),
     loadImage("assets/images/b-gold-pink.png"),
     loadImage("assets/images/b-gold-teal.png"),
@@ -113,14 +130,34 @@ function preload(){
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
-
+  createLimbs(allHeads, headImage, primaryColor, secondaryColor, colorWordHead, protagNoun, protagPronoun);
+  createLimbs(allArms, armImage, primaryColor, secondaryColor, colorWordArm, protagAdj, encounterNoun);
+  createLimbs(allLegs, legImage, primaryColor, secondaryColor, colorWordLeg, encounterAdj, verb);
+  createLimbs(allBodies, bodyImage, primaryColor, secondaryColor, colorWordBody, endAdj, offerNoun);
+  createCreature();
 }
 
 function draw(){
   background("#bfe97c");
   imageMode(CENTER);
-  image(body[2], width/2,height/2,500,500);
-  image(leg[7], width/2,height/2,500,500);
-  image(arm[10], width/2,height/2,500,500);
-  image(head[1], width/2,height/2,500,500);
+  // image(body[2], width/2,height/2,500,500);
+  // image(leg[7], width/2,height/2,500,500);
+  // image(arm[10], width/2,height/2,500,500);
+  // image(head[1], width/2,height/2,500,500);
+  creature.display();
+  text(verb[0],width/4,height/2);
+}
+
+function createLimbs(limb, image, primary, secondary, colorword, firstword, secondword){
+  for (var i = 0; i < 12; i++){
+    limb.push(new Limb(image[i], primary[i], secondary[i], colorword[i], firstword[i], secondword[i]));
+  }
+}
+
+function createCreature(){
+  head = allHeads[Math.floor(Math.random() * allHeads.length)];
+  arm = allArms[Math.floor(Math.random() * allArms.length)];
+  leg = allLegs[Math.floor(Math.random() * allLegs.length)];
+  body = allBodies[Math.floor(Math.random() * allBodies.length)];
+  creature = new Creature(head, arm, leg, body);
 }
