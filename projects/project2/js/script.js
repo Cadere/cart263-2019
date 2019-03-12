@@ -40,6 +40,7 @@ let creatureSize = 500;
 let corsiva;
 
 //arrays for the words of the little story
+//each array will be appended to an array of limbs
 let protagAdj = ["fancy", "skinny", "stocky", "silly", "witty", "clumsy", "puny", "teeny", "noisy", "funny", "cocky", "bratty"];
 let encounterAdj = ["itchy", "scary", "dirty", "busy", "dirty", "cozy", "ugly", "crazy", "weepy", "oozy", "tidy", "bouncy", "tipsy"];
 let endAdj = ["messy", "angry", "gooey", "dreamy", "perky", "sulky", "weary", "happy", "jolly", "scruffy", "dizzy", "funny"];
@@ -137,10 +138,12 @@ function preload(){
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
+  //creates the limbs with the proper arrays of images and words
   createLimbs(allHeads, headImage, primaryColor, secondaryColor, colorWordHead, protagNoun, protagPronoun);
   createLimbs(allArms, armImage, primaryColor, secondaryColor, colorWordArm, protagAdj, encounterNoun);
   createLimbs(allLegs, legImage, primaryColor, secondaryColor, colorWordLeg, encounterAdj, verb);
   createLimbs(allBodies, bodyImage, primaryColor, secondaryColor, colorWordBody, endAdj, offerNoun);
+  //creates the creature from a random element in each array of limbs
   createCreature();
 }
 
@@ -162,7 +165,9 @@ function startGame(){
   state = 'Game';
 }
 
+//displays the canvas elements of the game
 function draw(){
+  //the landscape is drawn regardless of the state of the game
   drawLandscape();
   switch (state){
 
@@ -180,6 +185,9 @@ function displayIntro(){
 
 }
 
+//displayGame()
+//
+//displays the creature, the song's text, and plays the lullaby
 function displayGame(){
   creature.display();
   creature.displaySong();
@@ -188,12 +196,19 @@ function displayGame(){
   lullaby.play();
 }
 
+//createLimbs()
+//
+//creates an array of the stated limb with the appropriate image and word arrays
 function createLimbs(limb, image, primary, secondary, colorword, firstword, secondword){
   for (var i = 0; i < 12; i++){
     limb.push(new Limb(image[i], primary[i], secondary[i], colorword[i], firstword[i], secondword[i]));
   }
 }
 
+//createCreature()
+//
+//Creates a creature object with a random element from each limb array
+//Then calls the creature method buildSong() to construct the story that will be displayed and sung
 function createCreature(){
   head = allHeads[Math.floor(Math.random() * allHeads.length)];
   arm = allArms[Math.floor(Math.random() * allArms.length)];
@@ -203,6 +218,9 @@ function createCreature(){
   creature.buildSong();
 }
 
+//modifyCreature()
+//
+//Modifies the creature object by assigning it a new random limb from each array and building a new song
 function modifyCreature(){
   head = allHeads[Math.floor(Math.random() * allHeads.length)];
   arm = allArms[Math.floor(Math.random() * allArms.length)];
@@ -212,18 +230,31 @@ function modifyCreature(){
   creature.buildSong();
 }
 
+//sing()
+//
+//Uses responsiveVoice to sing the song
 function sing(){
   responsiveVoice.speak(creature.song, 'US English Female', {volume: 1});
 }
 
+//addButton()
+//
+//appends a button to the body with the specified text and called function
 function addButton(label, call){
   let $button = $('<div> </div>')
+  //this adds a label to the button
   $button.text(label);
+  //this uses jquery ui to make it into a button
   $button.button();
+  //this specifies a function for the button to call when clicked
   $button.on('click', call)
+  //this appends the button to the body
   $('#buttonC').append($button);
 }
 
+//drawLandscape()
+//
+//draws the landscape from a variety of ellipses and rectangles
 function drawLandscape(){
   background("#2f4d7c");
   push();
