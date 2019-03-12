@@ -185,7 +185,7 @@ function sing(){
 }
 
 function addButton(label, call){
-  let $button = $('<div class = "guess"> </div>')
+  let $button = $('<div class = "icon"> </div>')
   $button.text(label);
   $button.button();
   $button.on('click', call)
