@@ -60,7 +60,7 @@ let verb = [
 ];
 let colorWordArm = ["dashing","dashing","dashing","singing","singing","singing","running","running","running","bouncing","bouncing","bouncing"]
 let colorWordHead = ["road", "road", "road", "path", "path", "path", "roof", "roof", "roof", "boat", "boat","boat"];
-let colorWordLeg = ["close", "close", "close", "far", "far", "far", "late", "late", "late", "soon", "soon", "soon"];
+let colorWordLeg = ["saw", "saw", "saw", "met", "met", "met", "felt", "felt", "felt", "imagined", "imagined", "imagined"];
 let colorWordBody = ["offered","offered","offered", "asked for", "asked for", "asked for", "traded", "traded", "traded", "prayed for", "prayed for", "prayed for"]
 
 //arrays for the colors
@@ -138,13 +138,15 @@ function setup(){
 }
 
 $(document).ready(function(){
-  addButton("Change");
+  addButton("Change", modifyCreature);
+  addButton("Sing", sing);
 } )
 
 function draw(){
   background("#bfe97c");
   imageMode(CENTER);
   creature.display();
+  text(creature.song, width/5, height/2);
 }
 
 function createLimbs(limb, image, primary, secondary, colorword, firstword, secondword){
@@ -159,6 +161,7 @@ function createCreature(){
   leg = allLegs[Math.floor(Math.random() * allLegs.length)];
   body = allBodies[Math.floor(Math.random() * allBodies.length)];
   creature = new Creature(head, arm, leg, body);
+  creature.buildSong();
 }
 
 function modifyCreature(){
@@ -167,12 +170,17 @@ function modifyCreature(){
   leg = allLegs[Math.floor(Math.random() * allLegs.length)];
   body = allBodies[Math.floor(Math.random() * allBodies.length)];
   creature.modify(head, arm, leg, body);
+  creature.buildSong();
 }
 
-function addButton(label){
+function sing(){
+  responsiveVoice.speak(creature.song)
+}
+
+function addButton(label, call){
   let $button = $('<div class = "guess"> </div>')
   $button.text(label);
   $button.button();
-  $button.on('click', modifyCreature)
+  $button.on('click', call)
   $('body').append($button);
 }
