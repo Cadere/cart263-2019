@@ -45,18 +45,18 @@ let protagPronoun = ["he", "she","he", "she","he", "she","he", "she","he", "she"
 let encounterNoun = ["monster", "witch", "man", "woman", "prince", "princess", "queen", "king", "horse", "snake", "flower", "tree"];
 let offerNoun = ["help", "a wish", "a game", "a greeting", "a name", "a fight", "cards", "a story", "a chance", "friendship","a favor", "a candy"]
 let verb = [
-  "thanked the "+protagonist,
+  "uttered thanks",
   "accepted gently",
   "refused roughly",
   "smiled widely",
   "screamed loudly",
   "groaned meanly",
-  "hugged the"+protagonist,
-  "played with the "+protagonist,
-  "sang with the "+protagonist,
-  "danced with the " + protagonist,
-  "surprised the "+protagonist,
-  "liked the "+protagonist
+  "gave a hug",
+  "began to play",
+  "sang a song",
+  "danced in joy",
+  "clenched fists",
+  "became a friend"
 ];
 let colorWordArm = ["dashing","dashing","dashing","singing","singing","singing","running","running","running","bouncing","bouncing","bouncing"]
 let colorWordHead = ["road", "road", "road", "path", "path", "path", "roof", "roof", "roof", "boat", "boat","boat"];
