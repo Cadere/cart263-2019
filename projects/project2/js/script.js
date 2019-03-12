@@ -33,8 +33,8 @@ let creature;
 //variables for the size of the Creature
 let creatureSize = 500;
 
-//a variable that contains the noun of the current protagonist with a placeholder value
-let protagonist = "hero";
+//a variable for the font
+let corsiva;
 
 //arrays for the words of the little story
 let protagAdj = ["fancy", "skinny", "stocky", "silly", "witty", "clumsy", "puny", "teeny", "noisy", "funny", "cocky", "bratty"];
@@ -70,6 +70,7 @@ let secondaryColor = ["green", "pink", "teal", "gold", "pink", "teal", "gold", "
 
 
 function preload(){
+  corsiva = loadFont("assets/fonts/MTCORSVA.TTF");
   headImage = [
     loadImage("assets/images/h-gold-green.png"),
     loadImage("assets/images/h-gold-pink.png"),
@@ -143,10 +144,16 @@ $(document).ready(function(){
 } )
 
 function draw(){
-  background("#bfe97c");
+  drawLandscape();
   imageMode(CENTER);
   creature.display();
-  text(creature.song, width/5, height/2);
+  push();
+  textFont(corsiva);
+  textAlign(CENTER);
+  textSize(30);
+  fill(255);
+  text(creature.song, width*0.3, height/6);
+  pop();
 }
 
 function createLimbs(limb, image, primary, secondary, colorword, firstword, secondword){
@@ -183,4 +190,34 @@ function addButton(label, call){
   $button.button();
   $button.on('click', call)
   $('body').append($button);
+}
+
+function drawLandscape(){
+  background("#2f4d7c");
+  push();
+  noStroke();
+  ellipseMode(CENTER);
+  fill(95,124,47,150);
+  //leftmost background hill
+  ellipse(width/8, height*0.5, width*0.7, height*0.6);
+  //middle background hill
+  ellipse(width*0.7, height*0.5, width*0.6, height*0.55);
+  //rightmost background hill
+  ellipse(width*1.2, height*0.5, width*0.6, height*0.65);
+  fill("#88a056");
+  //background paler green: makes the road
+  rect(0, height*0.4, windowWidth, windowHeight*0.6);
+  fill("#5f7c2f");
+  ellipseMode(CENTER);
+  //fills the right bottom corner with the same green as the hills
+  rect(width/2, height*0.4, width/2,height*0.6);
+  //leftmost hill
+  ellipse(0,height*0.5,width/2, height/2);
+  //middle hill
+  ellipse(width*0.6, height/2, width/2, height/2);
+  //rightmost hill
+  ellipse(width, height/2, width/2, height/3);
+  //bottom foreground hill
+  ellipse(width*0.4, height, width, height*0.6);
+  pop();
 }

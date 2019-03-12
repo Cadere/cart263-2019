@@ -9,6 +9,12 @@ function Creature(head, arm, leg, body){
 
 //displays the parts of the creature
 Creature.prototype.display = function(){
+  push();
+  ellipseMode(CENTER);
+  fill("#bfe97c");
+  noStroke();
+  ellipse(2*width/3, height/2+creatureSize/3, 0.8*creatureSize, 0.6*creatureSize);
+  pop();
   image(this.body.image, 2*width/3, height/2, creatureSize, creatureSize);
   image(this.leg.image, 2*width/3, height/2, creatureSize, creatureSize);
   image(this.arm.image, 2*width/3, height/2, creatureSize, creatureSize);
@@ -26,8 +32,8 @@ Creature.prototype.modify = function(head, arm, leg, body){
 //buildSong() constructs the story from the keywords attached to each limb
 Creature.prototype.buildSong = function(){
   this.song = `The ${this.arm.firstword} ${this.head.firstword} was ${this.arm.colorword} on the ${this.head.colorword}
-    Soon ${this.head.secondword} ${this.leg.colorword} a ${this.leg.firstword} ${this.arm.secondword}
-    The ${this.head.firstword} ${this.body.colorword} ${this.body.secondword}
-    The ${this.arm.secondword} ${this.leg.secondword}
-    And ${this.head.secondword} was left feeling all ${this.body.firstword}`
+  Soon ${this.head.secondword} ${this.leg.colorword} a ${this.leg.firstword} ${this.arm.secondword}
+  The ${this.head.firstword} ${this.body.colorword} ${this.body.secondword}
+  The ${this.arm.secondword} ${this.leg.secondword}
+  So ${this.head.secondword} was left feeling all ${this.body.firstword}`
 }
