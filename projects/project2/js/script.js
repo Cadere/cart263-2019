@@ -27,6 +27,9 @@ let arm;
 let leg;
 let body;
 
+//a variable for the music
+let lullaby = new Audio("assets/sounds/lullaby.wav");
+
 //variable for the creature
 let creature;
 
@@ -66,6 +69,9 @@ let colorWordBody = ["offered","offered","offered", "asked for", "asked for", "a
 //arrays for the colors
 let primaryColor = ["gold","gold","gold","green","green","green","pink","pink","pink","teal","teal","teal"];
 let secondaryColor = ["green", "pink", "teal", "gold", "pink", "teal", "gold", "green", "teal", "gold", "green", "pink"];
+
+//a variable for the switch statement
+let state = 'Intro';
 
 
 
@@ -139,28 +145,47 @@ function setup(){
 }
 
 $(document).ready(function(){
+  //initially displays a button showing an invitation to begin the game
   $('#intro').button().on('click', function(){
+    //clicking on the button removes it and calls the function startGame
     $('#intro').remove();
     startGame();
   })
 } )
 
+//startGame()
+//
+//adds the buttons to modify the creature and to sing the song. Switches the state of the game from front page to game
 function startGame(){
-  addButton("Change", modifyCreature);
   addButton("Sing", sing);
+  addButton("Change", modifyCreature);
+  state = 'Game';
 }
 
 function draw(){
   drawLandscape();
-  imageMode(CENTER);
+  switch (state){
+
+    case 'Intro':
+    displayIntro();
+    break;
+
+    case 'Game':
+    displayGame();
+    break;
+  }
+}
+
+function displayIntro(){
+
+}
+
+function displayGame(){
   creature.display();
-  push();
-  textFont(corsiva);
-  textAlign(CENTER);
-  textSize(30);
-  fill(255);
-  text(creature.song, width*0.3, height/6);
-  pop();
+  creature.displaySong();
+  lullaby.loop = true;
+  lullaby.volume = 0.5;
+  lullaby.play();
 }
 
 function createLimbs(limb, image, primary, secondary, colorword, firstword, secondword){
@@ -188,15 +213,15 @@ function modifyCreature(){
 }
 
 function sing(){
-  responsiveVoice.speak(creature.song)
+  responsiveVoice.speak(creature.song, 'US English Female', {volume: 1});
 }
 
 function addButton(label, call){
-  let $button = $('<div class = "icon"> </div>')
+  let $button = $('<div> </div>')
   $button.text(label);
   $button.button();
   $button.on('click', call)
-  $('body').append($button);
+  $('#buttonC').append($button);
 }
 
 function drawLandscape(){
