@@ -139,9 +139,16 @@ function setup(){
 }
 
 $(document).ready(function(){
+  $('#intro').button().on('click', function(){
+    $('#intro').remove();
+    startGame();
+  })
+} )
+
+function startGame(){
   addButton("Change", modifyCreature);
   addButton("Sing", sing);
-} )
+}
 
 function draw(){
   drawLandscape();
