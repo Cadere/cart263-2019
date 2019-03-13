@@ -16,7 +16,7 @@ Creature.prototype.display = function(){
   push();
   imageMode(CENTER);
   ellipseMode(CENTER);
-  fill("#bfe97c");
+  fill(colors[colorState].patch);
   noStroke();
   ellipse(2*width/3, height/2+creatureSize/3, 0.8*creatureSize, 0.6*creatureSize);
   image(this.body.image, 2*width/3, height/2, creatureSize, creatureSize);

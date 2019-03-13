@@ -148,6 +148,8 @@ function preload(){
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
+  //create the array of colors that will be used for the background
+  defineColors();
   //creates the limbs with the proper arrays of images and words
   createLimbs(allHeads, headImage, primaryColor, secondaryColor, colorWordHead, protagNoun, protagPronoun);
   createLimbs(allArms, armImage, primaryColor, secondaryColor, colorWordArm, protagAdj, encounterNoun);
@@ -173,6 +175,7 @@ $(document).ready(function(){
 function startGame(){
   addButton("Sing", sing);
   addButton("Change", modifyCreature);
+  creature.checkColor();
   state = 'Game';
 }
 
@@ -193,6 +196,7 @@ function draw(){
 }
 
 function displayIntro(){
+  colorState
   let fountainVector = createVector(width/2, 0);
   runIntroFountain(fountainVector);
 }
@@ -228,7 +232,6 @@ function createCreature(){
   body = allBodies[Math.floor(Math.random() * allBodies.length)];
   creature = new Creature(head, arm, leg, body);
   creature.buildSong();
-  creature.checkColor();
 }
 
 //modifyCreature()
@@ -241,6 +244,7 @@ function modifyCreature(){
   body = allBodies[Math.floor(Math.random() * allBodies.length)];
   creature.modify(head, arm, leg, body);
   creature.buildSong();
+  creature.checkColor();
 }
 
 //sing()
@@ -269,21 +273,21 @@ function addButton(label, call){
 //
 //draws the landscape from a variety of ellipses and rectangles
 function drawLandscape(){
-  background("#2f4d7c");
+  background(colors[colorState].sky);
   push();
   noStroke();
   ellipseMode(CENTER);
-  fill(95,124,47,150);
+  fill(colors[colorState].backhill);
   //leftmost background hill
   ellipse(width/8, height*0.5, width*0.7, height*0.6);
   //middle background hill
   ellipse(width*0.7, height*0.5, width*0.6, height*0.55);
   //rightmost background hill
   ellipse(width*1.2, height*0.5, width*0.6, height*0.65);
-  fill("#88a056");
+  fill(colors[colorState].road);
   //background paler green: makes the road
   rect(0, height*0.4, windowWidth, windowHeight*0.6);
-  fill("#5f7c2f");
+  fill(colors[colorState].hill);
   ellipseMode(CENTER);
   //fills the right bottom corner with the same green as the hills
   rect(width/2, height*0.4, width/2,height*0.6);
@@ -334,7 +338,11 @@ function runIntroFountain(vector){
 
 //defineColors()
 //
-//this function defines the colors that will be used in the background 
+//this function defines the colors that will be used in the background
 function defineColors(){
-
+  colors.push(new Colors(color(9,77,123),color(61,131,17),color(108,152,61),color(191,233,124),color(61,131,17,150)));
+  colors.push(new Colors(color(47,77,124),color(95,124,47),color(136,160,86),color(169,205,42),color(95,124,47,150)));
+  colors.push(new Colors(color(77,135,156),color(110,122,13),color(157,144,89),color(194,212,47),color(110,122,13,150)));
+  colors.push(new Colors(color(53,63,197),color(99,157,75),color(168,186,16),color(197,225,125),color(99,157,75,150)));
+  colors.push(new Colors(color(96,62,231),color(148,175,24),color(196,122,34),color(59,233,52),color(148,175,24,150)));
 }
