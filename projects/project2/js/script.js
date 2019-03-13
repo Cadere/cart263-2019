@@ -82,7 +82,7 @@ let state = 'Intro';
 //a variable for the colors to use for the background
 let colorState = 1;
 
-
+let colors = [];
 
 
 
@@ -320,6 +320,9 @@ function createIntroFountain(){
   introFountain = new Fountain(null, introParticle);
 }
 
+//runIntroFountain()
+//
+//this runs the fountain using a given position and the methods provided by the library
 function runIntroFountain(vector){
   push();
   introFountain.newCoordinates(vector);
@@ -327,4 +330,11 @@ function runIntroFountain(vector){
   introFountain.Create();
   introFountain.Step();
   pop();
+}
+
+//defineColors()
+//
+//this function defines the colors that will be used in the background 
+function defineColors(){
+
 }

@@ -1,3 +1,6 @@
+//Creature constructor
+//
+//the creature object assembles limbs and contains the methods to display them, create a new creature, assemble the song, and more
 function Creature(head, arm, leg, body){
   this.head = head;
   this.arm = arm;
@@ -56,21 +59,27 @@ Creature.prototype.displaySong = function(){
 //
 //this monstrous method checks the level of match between the monster parts and returns a value that is lowest the better the match
 Creature.prototype.checkColor = function(){
+  //this checks if all the primary colors are the same
   if(this.head.primary === this.arm.primary && this.leg.primary && this.body.primary){
+    //if all the primary colors are the same, if checks if all the secondary colors are the same (Which is a perfect match)
     if(this.head.secondary === this.arm.secondary && this.leg.secondary && this.body.secondary){
       colorState = 0;
       return colorState;
     }
+    //if the secondary colors are not all the same, there are at least 3 colors present which is a less good match
     else{
       colorState = 2;
       return colorState;
     }
   }
+  //if the primary colors are not all the same, we use a different method of comparison
   else {
+    //we create a variable for each possible color
     let gold = 0;
     let green = 0;
     let pink = 0;
     let teal = 0;
+    //then we run through the array and tally the number of times each color appears
     for (let i; i < this.allColors.length; i++){
       if(this.allColors[i] === "gold"){
         gold ++;
@@ -85,16 +94,21 @@ Creature.prototype.checkColor = function(){
         teal ++;
       }
     }
+    //if one color is equal to 0, then there are 3 colors or less present
     if(gold || green || pink || teal === 0){
+      //if one color is equal to 0, we check if there are 2 colors equal to 0
       if (gold && green || gold && pink || gold && teal || green && pink || green && teal || pink && teal === 0){
         colorState = 1;
         return colorState;
+        //if this is the case the color match is very good (even though the part match is not perfect)
       }
       else{
         colorState = 3;
         return colorState;
+        //if not there are 3 colors present which is a less good match
       }
     }
+    //if no colors are equal to 0 there are 4 colors present and the main colors don't all match, which is a bad match
     else{
       colorState = 4;
       return colorState;

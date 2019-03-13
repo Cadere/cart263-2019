@@ -1,3 +1,6 @@
+//Limb constructor
+//
+//Limb serves only to store property values
 function Limb (image, primary, secondary, colorword, firstword, secondword){
   this.primary = primary;
   this.secondary = secondary;
