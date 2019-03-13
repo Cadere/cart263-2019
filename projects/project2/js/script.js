@@ -71,6 +71,11 @@ let colorWordBody = ["offered","offered","offered", "asked for", "asked for", "a
 let primaryColor = ["gold","gold","gold","green","green","green","pink","pink","pink","teal","teal","teal"];
 let secondaryColor = ["green", "pink", "teal", "gold", "pink", "teal", "gold", "green", "teal", "gold", "green", "pink"];
 
+//variables for the fountains
+//intro fountain
+let introFountain;
+let introParticle;
+
 //a variable for the switch statement
 let state = 'Intro';
 
@@ -145,6 +150,7 @@ function setup(){
   createLimbs(allBodies, bodyImage, primaryColor, secondaryColor, colorWordBody, endAdj, offerNoun);
   //creates the creature from a random element in each array of limbs
   createCreature();
+  createIntroFountain();
 }
 
 $(document).ready(function(){
@@ -182,7 +188,8 @@ function draw(){
 }
 
 function displayIntro(){
-
+  let fountainVector = createVector(width/2, 0);
+  runIntroFountain(fountainVector);
 }
 
 //displayGame()
@@ -282,5 +289,36 @@ function drawLandscape(){
   ellipse(width, height/2, width/2, height/3);
   //bottom foreground hill
   ellipse(width*0.4, height, width, height*0.6);
+  pop();
+}
+
+
+//createIntroFountain()
+//
+//this function creates the particle object and the fountain that will use them
+function createIntroFountain(){
+  introParticle = {
+    size: [10,20],
+    sizePercent: [0.995],
+    angle: [180],
+    speed: [1],
+    lifetime: [900],
+    color: ["#ffffff"],
+    rate: [300,150],
+    limit: [200],
+    dxy: [1,0],
+    x: [0.5],
+    y:[0.5]
+  };
+
+  introFountain = new Fountain(null, introParticle);
+}
+
+function runIntroFountain(vector){
+  push();
+  introFountain.newCoordinates(vector);
+  introFountain.Draw();
+  introFountain.Create();
+  introFountain.Step();
   pop();
 }
