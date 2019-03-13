@@ -3,6 +3,7 @@ function Creature(head, arm, leg, body){
   this.arm = arm;
   this.leg = leg;
   this.body = body;
+  this.allColors = [this.head.primary, this.arm.primary, this.leg.primary, this.body.primary, this.head.secondary, this.arm.secondary, this.leg.secondary, this.body.secondary];
   this.song;
 }
 
@@ -28,6 +29,7 @@ Creature.prototype.modify = function(head, arm, leg, body){
   this.arm = arm;
   this.leg = leg;
   this.body = body;
+  this.allColors = [this.head.primary, this.arm.primary, this.leg.primary, this.body.primary, this.head.secondary, this.arm.secondary, this.leg.secondary, this.body.secondary];
 }
 
 //buildSong() constructs the story from the keywords attached to each limb
@@ -48,4 +50,54 @@ Creature.prototype.displaySong = function(){
   fill(255);
   text(creature.song, width*0.3, height/6);
   pop();
+}
+
+//checkColor()
+//
+//this monstrous method checks the level of match between the monster parts and returns a value that is lowest the better the match
+Creature.prototype.checkColor = function(){
+  if(this.head.primary === this.arm.primary && this.leg.primary && this.body.primary){
+    if(this.head.secondary === this.arm.secondary && this.leg.secondary && this.body.secondary){
+      colorState = 0;
+      return colorState;
+    }
+    else{
+      colorState = 2;
+      return colorState;
+    }
+  }
+  else {
+    let gold = 0;
+    let green = 0;
+    let pink = 0;
+    let teal = 0;
+    for (let i; i < this.allColors.length; i++){
+      if(this.allColors[i] === "gold"){
+        gold ++;
+      }
+      else if(this.allColors[i] === "green"){
+        green ++;
+      }
+      else if(this.allColors[i] === "pink"){
+        pink ++;
+      }
+      else if(this.allColors[i] === "teal"){
+        teal ++;
+      }
+    }
+    if(gold || green || pink || teal === 0){
+      if (gold && green || gold && pink || gold && teal || green && pink || green && teal || pink && teal === 0){
+        colorState = 1;
+        return colorState;
+      }
+      else{
+        colorState = 3;
+        return colorState;
+      }
+    }
+    else{
+      colorState = 4;
+      return colorState;
+    }
+  }
 }

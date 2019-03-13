@@ -79,6 +79,11 @@ let introParticle;
 //a variable for the switch statement
 let state = 'Intro';
 
+//a variable for the colors to use for the background
+let colorState = 1;
+
+
+
 
 
 function preload(){
@@ -223,6 +228,7 @@ function createCreature(){
   body = allBodies[Math.floor(Math.random() * allBodies.length)];
   creature = new Creature(head, arm, leg, body);
   creature.buildSong();
+  creature.checkColor();
 }
 
 //modifyCreature()
