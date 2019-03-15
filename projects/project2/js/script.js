@@ -2,11 +2,11 @@
 
 /*****************
 
-Title of Project: purpuseful gracelessness
-Author Name
+Make A Friend! (Purposeful Gracelessness)
+Eugene N. Fournier
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+This project generates an image of a creature from random creature parts and a little story to go with it.
+The little story is sung using Responsive Voice.
 
 ******************/
 //variables for the images
