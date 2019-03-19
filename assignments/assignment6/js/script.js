@@ -10,6 +10,8 @@ author, and this description to match your project!
 
 ******************/
 let verb = "is";
+let firstA = "a";
+let secondA = "a";
 
 $(document).ready(function () {
   $.getJSON("data/data.json",dataLoaded)
@@ -35,12 +37,26 @@ function generateContent(data){
   else {
     verb = "is";
   }
+
   let cat = getRandomElement(data.cats);
+  let color = getRandomElement(data.colors).color;
   let room = getRandomElement(data.rooms);
 
-  let color = getRandomElement(data.colors).color;
+  let vowels = "AEIOUaeiou";
+  if(vowels.indexOf(cat.charAt(0)) !== -1){
+    firstA = "an";
+  }
+  else{
+    firstA = "a";
+  }
+  if(vowels.indexOf(color.charAt(0)) !== -1){
+    secondA = "an";
+  }
+  else{
+    secondA = "a";
+  }
 
-  let description = `${condiment} ${verb} like a ${cat} in a ${color} ${room}`;
+  let description = `${condiment} ${verb} like ${firstA} ${cat} in ${secondA} ${color} ${room}.`;
   $('body').append('<p class = "description">'+description+'</p>');
 }
 
