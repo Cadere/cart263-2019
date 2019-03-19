@@ -16,10 +16,19 @@ $(document).ready(function () {
 })
 
 function dataLoaded(data){
-  console.log(data);
+  $('.button').button().on('click', function(){
+    generateContent(data);
+  });
+  // let $button = $('<div class = "guess"> </div>')
+  // $button.text(label);
+  // $button.button();
+  // $button.on('click', buttonClicked)
+  // $('body').append($button);
+}
 
+function generateContent(data){
+  $('.description').remove();
   let condiment = getRandomElement(data.condiments);
-  console.log(condiment)
   if (condiment.charAt(condiment.length-1) === "s"){
     verb = "are";
   }
@@ -28,8 +37,11 @@ function dataLoaded(data){
   }
   let cat = getRandomElement(data.cats);
   let room = getRandomElement(data.rooms);
-  let description = `${condiment} ${verb} like a ${cat} in a ${room}`;
-  $('body').append('<p>'+description+'</p>');
+
+  let color = getRandomElement(data.colors).color;
+
+  let description = `${condiment} ${verb} like a ${cat} in a ${color} ${room}`;
+  $('body').append('<p class = "description">'+description+'</p>');
 }
 
 function getRandomElement(array){
