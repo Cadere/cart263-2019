@@ -67,8 +67,7 @@ function setup(){
 
 function draw(){
   setColors();
-  console.log("red",red, "green", green, "blue", blue);
-  background(red, green, blue, 50);
+  background(red, green, blue,10);
 }
 
 function setColors(){
