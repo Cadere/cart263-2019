@@ -3,3 +3,11 @@
 This is the style file for this project.
 
 **********************************************/
+body{
+  background-color: #004d4d;
+}
+
+.description {
+  font: italic 30px Georgia;
+  color: white;
+}
