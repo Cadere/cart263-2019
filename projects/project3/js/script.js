@@ -26,5 +26,5 @@ function setup(){
   child = new Oujabe();
   child.breed(mother, father);
   child.getPhenotype();
-  console.log("child", child.genes.locusR, child.genes.locusF, child.genes.locusY,child.genes.locusC, child.phenotype);
+  console.log("child", child.genes.locusC, child.genes.locusD, child.phenotype);
 }

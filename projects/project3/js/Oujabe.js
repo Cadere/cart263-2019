@@ -46,6 +46,9 @@ Oujabe.prototype.getPhenotype = function(){
   this.locusF();
   this.locusY();
   this.locusC();
+  if(!this.albino){
+    this.locusD();
+  }
 }
 
 //locusR()
@@ -128,5 +131,27 @@ Oujabe.prototype.locusC = function(){
   else{
     this.phenotype += "c";
     this.albino = true;
+  }
+}
+
+//locusD()
+//
+//analyses to D locus to determine the phenotype
+Oujabe.prototype.locusD = function(){
+  let locusD = this.genes.locusD.toString();
+  //genes on the D locus are codominant
+  if(locusD.indexOf("D") !== -1){
+    if(locusD.indexOf("d") !== -1){
+      //in this case the oujabe is either dD or Dd
+      this.phenotype += "d";
+    }
+    else{
+      //in this case the oujabe is DD
+      this.phenotype += "D";
+    }
+  }
+  else{
+    //in this case the oujabe is dd
+    this.phenotype += "a";
   }
 }
