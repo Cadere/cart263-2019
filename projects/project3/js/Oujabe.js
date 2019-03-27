@@ -30,7 +30,10 @@ Oujabe.prototype.generateRandom = function(mOrF){
 
 Oujabe.prototype.breed = function(mother, father){
   this.sex = random(sex);
-
+  let genesKeys = Object.keys(genetics);
+  for(let i = 0; i < genesKeys.length; i++){
+    this.genes[genesKeys[i]] = mother.genes[genesKeys[i]] + father.genes[genesKeys[i]];
+  }
 }
 
 //getPhenotype();
