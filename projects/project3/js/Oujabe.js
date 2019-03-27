@@ -9,6 +9,7 @@ function Oujabe(){
   this.sex = "";
   this.phenotype = "";
   this.letality = false;
+  this.albino = false;
   this.genes = {};
 }
 
@@ -44,6 +45,7 @@ Oujabe.prototype.getPhenotype = function(){
   this.locusR();
   this.locusF();
   this.locusY();
+  this.locusC();
 }
 
 //locusR()
@@ -91,5 +93,40 @@ Oujabe.prototype.locusY = function(){
   //y is recessive
   else{
     this.phenotype += "y";
+  }
+}
+
+//locusC()
+//
+//analyses the C locus to determine the phenotype
+Oujabe.prototype.locusC = function(){
+  let locusC = this.genes.locusC.toString();
+  //C is dominant
+  if(locusC.indexOf("C") !== -1){
+    this.phenotype += "C";
+  }
+  //V is recessive to C but dominant to y
+  else if(locusC.indexOf("V") !== -1){
+    //V is partially dominant with c
+    if(locusC.indexOf("c") !== -1){
+      this.phenotype += "v";
+    }
+    else{
+      this.phenotype += "V";
+    }
+  }
+  else if(locusC.indexOf("Y") !== -1){
+    //Y is partially dominant with c
+    if(locusC.indexOf("c") !== -1){
+      this.phenotype += "y";
+    }
+    else{
+      this.phenotype += "Y";
+    }
+  }
+  //c is recessive
+  else{
+    this.phenotype += "c";
+    this.albino = true;
   }
 }
