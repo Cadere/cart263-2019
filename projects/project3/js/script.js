@@ -23,9 +23,8 @@ function setup(){
   mother.generateRandom("f");
   father = new Oujabe();
   father.generateRandom("m");
-  console.log("mother", mother.sex, mother.genes);
-  console.log("father",father.sex, father.genes);
   child = new Oujabe();
   child.breed(mother, father);
-  console.log("child",child.sex, child.genes);
+  child.getPhenotype();
+  console.log("child", child.genes.locusR, child.genes.locusF, child.genes.locusY, child.phenotype);
 }
