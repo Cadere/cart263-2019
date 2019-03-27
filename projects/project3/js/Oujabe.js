@@ -24,7 +24,7 @@ Oujabe.prototype.generateRandom = function(mOrF){
   }
   let genesKeys = Object.keys(genetics);
   for(let i = 0; i < genesKeys.length; i++){
-    this.genes[genesKeys[i]] = random(genetics[genesKeys[i]]) + random(genetics[genesKeys[i]]);
+    this.genes[genesKeys[i]] = [random(genetics[genesKeys[i]]), random(genetics[genesKeys[i]])];
   }
 }
 
@@ -32,7 +32,7 @@ Oujabe.prototype.breed = function(mother, father){
   this.sex = random(sex);
   let genesKeys = Object.keys(genetics);
   for(let i = 0; i < genesKeys.length; i++){
-    this.genes[genesKeys[i]] = mother.genes[genesKeys[i]] + father.genes[genesKeys[i]];
+    this.genes[genesKeys[i]] = [random(mother.genes[genesKeys[i]]), random(father.genes[genesKeys[i]])];
   }
 }
 
