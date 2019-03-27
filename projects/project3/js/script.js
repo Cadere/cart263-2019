@@ -10,15 +10,18 @@ The little story is sung using Responsive Voice.
 
 ******************/
 let genetics;
-let sex = ["m","f"];
-let demoOujabe;
+let mother;
+let father;
 
 function preload(){
   genetics = loadJSON("data/genetics.json");
 }
 
 function setup(){
-  demoOujabe = new Oujabe();
-  demoOujabe.generateRandom();
-  console.log(demoOujabe.sex, demoOujabe.genes);
+  mother = new Oujabe();
+  mother.generateRandom("f");
+  father = new Oujabe();
+  father.generateRandom("m");
+  console.log("mother", mother.sex, mother.genes);
+  console.log("father",father.sex, father.genes);
 }
