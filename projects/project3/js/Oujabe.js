@@ -30,6 +30,7 @@ Oujabe.prototype.generateRandom = function(mOrF){
   for(let i = 0; i < genesKeys.length; i++){
     this.genes[genesKeys[i]] = [random(genetics[genesKeys[i]]), random(genetics[genesKeys[i]])];
   }
+  this.getPhenotype();
 }
 
 Oujabe.prototype.breed = function(mother, father){
@@ -38,6 +39,7 @@ Oujabe.prototype.breed = function(mother, father){
   for(let i = 0; i < genesKeys.length; i++){
     this.genes[genesKeys[i]] = [random(mother.genes[genesKeys[i]]), random(father.genes[genesKeys[i]])];
   }
+  this.getPhenotype();
 }
 
 //getPhenotype();
@@ -74,6 +76,28 @@ Oujabe.prototype.locusR = function(){
   else{
     this.phenotype += "r";
     this.pattern += "r";
+  }
+}
+
+
+
+Oujabe.prototype.simpleDominance = function(locusX, stringA, stringB, phenotype, pattern){
+  let locus = locusX.toString();
+  if(locus.indexOf(stringA) !== -1){
+    if(phenotype){
+      this.phenotype += stringA;
+    }
+    if(pattern){
+      this.pattern += stringA;
+    }
+  }
+  else{
+    if(phenotype){
+      this.phenotype += stringB;
+    }
+    if(pattern){
+      this.pattern += stringB;
+    }
   }
 }
 

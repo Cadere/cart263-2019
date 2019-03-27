@@ -25,6 +25,5 @@ function setup(){
   father.generateRandom("m");
   child = new Oujabe();
   child.breed(mother, father);
-  child.getPhenotype();
-  console.log("child", child.albino, child.genes.locusB, child.genes.locusS, child.pattern, child.letality);
+  console.log("child", child.phenotype, child.pattern, "mother", mother.phenotype, mother.pattern)
 }
