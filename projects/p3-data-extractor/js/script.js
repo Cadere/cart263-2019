@@ -22,3 +22,32 @@ phenotype = [
   "yCd","YYd","YCd","YVd","yYd","Yxd",
   "yCa","YYa","YCa","YVa","yYa","Yxd"
 ]
+
+//an array to hold the images
+let images = [];
+
+function preload(){
+  images = [
+    {phen:"RF", image: loadImage("assets/images/oujabeBdarkface.png")},
+    {phen:"rF", image: loadImage("assets/images/oujabeRdarkface.png"})
+  ]
+}
+
+function setup(){
+  
+}
+
+function rgbToHex(rgb) {
+  let hex = Number(rgb).toString(16);
+  if (hex.length < 2) {
+       hex = "0" + hex;
+  }
+  return hex;
+};
+
+function fullColorHex(r,g,b){
+  var red = rgbToHex(r);
+  var green = rgbToHex(g);
+  var blue = rgbToHex(b);
+  return red+green+blue;
+};
