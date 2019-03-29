@@ -33,16 +33,15 @@ let phenotype = [
 //an array to hold the images
 let images = [];
 
-function preload(){
-  images = [
-    {phen:"RF", picture: loadImage("assets/images/oujabeBdarkface.png")},
-    {phen:"rF", picture: loadImage("assets/images/oujabeRdarkface.png")}
-  ]
-}
+// function preload(){
+//   images = [
+//     {phen:"RF", picture: loadImage("assets/images/oujabeBdarkface.png")},
+//     {phen:"rF", picture: loadImage("assets/images/oujabeRdarkface.png")}
+//   ]
+// }
 
 $(document).ready(function(){
   let canv = document.createElement('canvas');
-  console.log(canv);
   $(canv)
      .attr('id', 'canvas')
      .width(6000)
@@ -50,7 +49,19 @@ $(document).ready(function(){
      .appendTo('body');
 
   let context = canv.getContext("2d");
-  console.log(context);
+
+  let pictures = [
+    new Image(),
+    new Image()
+  ]
+
+  pictures[0].src = 'assets/images/oujabeRdarkface.png'
+  pictures[1].src = 'assets/images/oujabeBdarkface.png'
+
+  images = [
+    {phen:"RF", picture: pictures[0]},
+    {phen:"rF", picture: pictures[1]}
+  ]
 
   let futureJSON = "{"
   for(let i=0; i<images.length; i++){
@@ -58,7 +69,7 @@ $(document).ready(function(){
     let index = 0;
     for(let j=0; j<lines; j++){
       for(let k=0; k<columns; k++){
-        let name = images.phen + phenotype[index];
+        let name = images[i].phen + phenotype[index];
         futureJSON += `${name} : [`
         // let colors = [];
         for(let l=0; l<pixelX.length; l++){
