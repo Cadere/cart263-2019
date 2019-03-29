@@ -40,11 +40,18 @@ function preload(){
   ]
 }
 
-function setup(){
-  let canv = document.getElementById("canvas");
+$(document).ready(function(){
+  let canv = document.createElement('canvas');
   console.log(canv);
-  let context = canv.getContext("2D");
+  $(canv)
+     .attr('id', 'canvas')
+     .width(6000)
+     .height(2400)
+     .appendTo('body');
+
+  let context = canv.getContext("2d");
   console.log(context);
+
   let futureJSON = "{"
   for(let i=0; i<images.length; i++){
     context.drawImage(images[i].picture,0,0);
@@ -68,7 +75,7 @@ function setup(){
     }
   }
   console.log(futureJSON);
-}
+})
 
 function rgbToHex(rgb) {
   let hex = Number(rgb).toString(16);
