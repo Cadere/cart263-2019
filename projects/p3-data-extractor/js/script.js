@@ -70,12 +70,10 @@ $(document).ready(function(){
     for(let j=0; j<lines; j++){
       for(let k=0; k<columns; k++){
         let name = images[i].phen + phenotype[index];
-        futureJSON += `${name} : [`
-        // let colors = [];
+        futureJSON += `"${name}" : [`
         for(let l=0; l<pixelX.length; l++){
           let pixel = context.getImageData(pixelX[l]+distanceX*k, pixelY[l]+distanceY*j, 1,1);
-          // colors.push("#"+fullColorHex(pixel[0],pixel[1],pixel[2]));
-          futureJSON += "#"+fullColorHex(pixel[0],pixel[1],pixel[2])
+          futureJSON += `"#${fullColorHex(pixel.data[0],pixel.data[1],pixel.data[2])}"`
           if(l < pixelX.length-1){
             futureJSON += ","
           }
