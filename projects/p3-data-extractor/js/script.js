@@ -10,7 +10,7 @@ here I am building a small program that will process images and store the colors
 
 ******************/
 // this variable is for the x positions of the pixels whose colors we want
-//the colors are in the following order: body, leg, belly, head, head2, violet, pattern, hoof, eye
+//the colors are in the following order: body, leg, belly, head, headaccent, violet, pattern, hoof, eye
 let pixelX = [513,610,394,282,154,537,187,198,136];
 //this is the variable for the y positions of the pixels whose colors we want
 let pixelY = [313,507,396,69,147,220,283,576,97];
@@ -94,7 +94,7 @@ function imagesAllLoaded(){
 
 function analyseImages(){
   //basically this program is trying to build a json file in a kinda ugly way
-  let futureJSON = "{"
+  let futureJSON = "{\n"
   for(let i=0; i<images.length; i++){
     //I draw the image to the canvas
     context.drawImage(images[i].picture,0,0);
@@ -121,11 +121,12 @@ function analyseImages(){
           }
         }
         //I close the array in the json string and increment the index
-        futureJSON +="],"
+        futureJSON +="], \n"
         index ++;
       }
     }
   }
+  futureJSON += "\n}"
   console.log(futureJSON);
 }
 
