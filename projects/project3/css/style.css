@@ -5,20 +5,3 @@ In this case it's just padding and margin to 0
 so the canvas is flush with the top left corner.
 
 **********************************************/
-
-canvas{
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-#intro{
-  margin-left: 40%;
-  margin-top: 25%;
-}
-
-#buttonC{
-  margin-left: 18%;
-  margin-top: 40%;
-}

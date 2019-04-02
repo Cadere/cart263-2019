@@ -2,11 +2,9 @@
 
 /*****************
 
-Make A Friend! (Purposeful Gracelessness)
+oujabe breeding game
 Eugene N. Fournier
 
-This project generates an image of a creature from random creature parts and a little story to go with it.
-The little story is sung using Responsive Voice.
 
 ******************/
 let genetics;

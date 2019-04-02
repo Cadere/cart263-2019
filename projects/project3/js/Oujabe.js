@@ -14,6 +14,7 @@ function Oujabe(){
   this.letality = false;
   this.albino = false;
   this.genes = {};
+  this.images;
 }
 
 //generateRandom();
@@ -300,7 +301,7 @@ Oujabe.prototype.checkLetality = function(){
 //this only exists for this prototype
 Oujabe.prototype.textGenesAndPhenotype = function(name,x,y){
   text(name,x,y);
-  text(this.phenotype+this.pattern, x, y+20);
+  text(this.phenotype+" "+this.pattern, x, y+20);
   let genesKeys = Object.keys(genetics);
   for(i=0; i < genesKeys.length; i++){
     text(`${genesKeys[i]}: ${this.genes[genesKeys[i]].toString()}`, x,y+40+20*i);
