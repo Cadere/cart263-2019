@@ -14,7 +14,10 @@ function Oujabe(){
   this.letality = false;
   this.albino = false;
   this.genes = {};
-  this.images;
+  //these variables will be used to display the proper images to reflect the pattern genes present
+  this.mask = false;
+  this.violet = false;
+  this.colorSet;
 }
 
 //generateRandom();
@@ -60,6 +63,8 @@ Oujabe.prototype.getPhenotype = function(){
   else{
     this.checkLetality;
   }
+  this.colorSet = pigmentation[this.phenotype];
+  this.analysePattern();
 }
 
 //locusR()
@@ -287,4 +292,59 @@ Oujabe.prototype.textGenesAndPhenotype = function(name,x,y){
   for(i=0; i < genesKeys.length; i++){
     text(`${genesKeys[i]}: ${this.genes[genesKeys[i]].toString()}`, x,y+40+20*i);
   }
+}
+
+//analysePattern()
+//
+//parses the pattern string to set the relevant properties to the right boolean
+Oujabe.prototype.analysePattern = function(){
+  if(this.pattern.indexOf("b") !== -1){
+    this.mask = true;
+  }
+  if(this.pattern.indexOf("V") !== -1){
+    this.violet = true;
+  }
+}
+
+//display()
+//
+//this displays the oujabe
+Oujabe.prototype.display = function(x,y){
+  push();
+  tint(this.colorSet[0]);
+  image(body, x, y);
+  noTint();
+  tint(this.colorSet[1]);
+  image(leg, x, y);
+  noTint();
+  tint(this.colorSet[2]);
+  image(stomach, x, y);
+  noTint();
+  if(this.violet){
+    tint(this.colorSet[5]);
+    image(violet, x, y);
+    noTint();
+  }
+  tint(this.colorSet[3]);
+  image(head, x, y);
+  noTint();
+  tint(this.colorSet[4]);
+  image(accent, x, y);
+  noTint();
+  if(this.mask){
+    tint(this.colorSet[6]);
+    image(mask, x, y);
+    noTint();
+    image(whiter, x,y);
+  }
+  else{
+    image(whiteR, x, y);
+  }
+  tint(this.colorSet[7]);
+  image(hoof, x, y);
+  noTint();
+  tint(this.colorSet[8]);
+  image(eye, x,y);
+  noTint();
+  pop();
 }

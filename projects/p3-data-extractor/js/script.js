@@ -42,7 +42,7 @@ $(document).ready(function(){
      .attr('id', 'canvas')
      .appendTo('body');
 
-  canv.width = 6000;
+  canv.width = 7000;
   canv.height = 2400;
 
   context = canv.getContext("2d");
