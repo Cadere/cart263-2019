@@ -50,15 +50,27 @@ $(document).ready(function(){
   //creating an array of images
   pictures = [
     new Image(),
+    new Image(),
+    new Image(),
+    new Image(),
+    new Image(),
     new Image()
   ]
   //giving them sources
   pictures[0].src = 'assets/images/oujabeRdarkface.png';
   pictures[1].src = 'assets/images/oujabeBdarkface.png';
+  pictures[2].src = 'assets/images/oujabeRpeachface.png';
+  pictures[3].src = 'assets/images/oujabeBpeachface.png';
+  pictures[4].src = 'assets/images/oujabeRwhiteface.png';
+  pictures[5].src = 'assets/images/oujabeBwhiteface.png';
   //this is an array with the pictures and their id
   images = [
     {phen:"RF", picture: pictures[0]},
-    {phen:"rF", picture: pictures[1]}
+    {phen:"rF", picture: pictures[1]},
+    {phen:"Rb", picture: pictures[2]},
+    {phen:"rb", picture: pictures[3]},
+    {phen:"Rw", picture: pictures[4]},
+    {phen:"rw", picture: pictures[5]}
   ]
 
   //loop through the pictures to ensure they are all loaded
@@ -85,26 +97,23 @@ function analyseImages(){
   let futureJSON = "{"
   for(let i=0; i<images.length; i++){
     //I draw the image to the canvas
-    //this is where it starts being problematic, the image is not loaded yet when it gets to this step
     context.drawImage(images[i].picture,0,0);
-    //this iterates through an array of strings
+    //the index will iterate through an array of strings
     let index = 0;
-    //I'm trying to obtain color values for pixels at specific locations on a grid
     //this loop moves the set of pixels to the next line of the grid
     for(let j=0; j<lines; j++){
       //this loop moes the set of pixels to the next column on the grid
       for(let k=0; k<columns; k++){
         //the name of the set of pixels is taken from one of the image object attributes
-        //plus a string from an array
+        //plus a string from an array index iterates through
         let name = images[i].phen + phenotype[index];
         //the name of the pixel array is added to the would-be json string
         futureJSON += `"${name}" : [`
         //this loop iterates through the pixels
         for(let l=0; l<pixelX.length; l++){
           //I get the data from the specific pixel on the canvas
-          //rn this returns only 0 because the image is not loaded
           let pixel = context.getImageData(pixelX[l]+distanceX*k, pixelY[l]+distanceY*j, 1,1);
-          //full color hex converts the rgb value to a hex, there does not seem to be any problem with it
+          //full color hex converts the rgb value to a hex
           futureJSON += `"#${fullColorHex(pixel.data[0],pixel.data[1],pixel.data[2])}"`
           //I add a comma to the json string if it's not the last pixel
           if(l < pixelX.length-1){

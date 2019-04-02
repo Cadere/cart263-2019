@@ -152,12 +152,15 @@ Oujabe.prototype.locusC = function(){
   if(locusC.indexOf("C") !== -1){
     this.phenotype += "C";
   }
-  //V is recessive to C but dominant to y
+  //V is codominant with c and y
   else if(locusC.indexOf("V") !== -1){
     //V is partially dominant with c
     if(locusC.indexOf("c") !== -1){
       //the resulting "v" phenotype is called lilac
       this.phenotype += "v";
+    }
+    else if(locusC.indexOf("Y") !== -1){
+      this.phenotype += "x"
     }
     else{
       this.phenotype += "V";
