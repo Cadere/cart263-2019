@@ -11,6 +11,11 @@ let mother;
 let father;
 let child;
 
+//some buttons
+let motherButton;
+let fatherButton;
+let childButton;
+
 //variables for the json files
 let genetics;
 let pigmentation;
@@ -55,11 +60,55 @@ function setup(){
   father.generateRandom("m");
   child = new Oujabe();
   child.breed(mother, father);
+  motherButton = new Button(300,20,"New Mother",mother);
+  fatherButton = new Button(300,320,"New Father",father);
+  childButton = new Button(800,20, "Breed Again",child);
+}
 
+function draw(){
+  background(255);
   mother.textGenesAndPhenotype("MOTHER",15,110);
   mother.display(40,15);
   father.textGenesAndPhenotype("FATHER",15,410);
   father.display(40,315);
   child.textGenesAndPhenotype("CHILD",515,110);
   child.display(540,15);
+  explanation();
+  motherButton.display();
+  fatherButton.display();
+  childButton.display();
+}
+
+function explanation(){
+  let explanation = `PHENOTYPE, PATTERN
+Locus R determines if the head is red or blue;
+Locus F determines the density of yellow and red pigments;
+Locus Y can dilute the amount of melanin;
+Locus C can dilute the amount of melanin,
+  It is also the locus for a violet tint and for albinism;
+Locus D is the locus of hypermelanism;
+Locus B determines if there is a black mask;
+Locus S is not yet implemented.`
+  text(explanation, 515, 410);
+}
+
+function mouseClicked(){
+  motherButton.clicked();
+  fatherButton.clicked();
+  childButton.clicked(child);
+}
+
+function newMother(){
+  console.log("newMother called");
+  mother.generateRandom("f");
+}
+
+function newFather(){
+  console.log("newFather called");
+  father.generateRandom("m");
+}
+
+function breedAgain(){
+  console.log("breedAgain called");
+  child.breed(mother, father);
 }

@@ -75,7 +75,7 @@ $(document).ready(function(){
 
   //loop through the pictures to ensure they are all loaded
   for(let i = 0; i < pictures.length; i++){
-    $(pictures[0]).on("load", imagesAllLoaded);
+    $(pictures[i]).on("load", imagesAllLoaded);
   }
 })
 

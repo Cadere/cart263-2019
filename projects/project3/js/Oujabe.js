@@ -20,10 +20,24 @@ function Oujabe(){
   this.colorSet;
 }
 
+//parametersReset();
+//
+//sets the parameters back to the default values
+Oujabe.prototype.parametersReset = function(){
+  this.phenotype = "";
+  this.pattern = "";
+  this.letality = false;
+  this.albino = false;
+  this.genes = {};
+  this.mask = false;
+  this.violet = false;
+}
+
 //generateRandom();
 //
 //Creates a brand new oujabe randomly
 Oujabe.prototype.generateRandom = function(mOrF){
+  this.parametersReset();
   if(!mOrF){
     this.sex = random(sex);
   }
@@ -38,6 +52,7 @@ Oujabe.prototype.generateRandom = function(mOrF){
 }
 
 Oujabe.prototype.breed = function(mother, father){
+  this.parametersReset();
   this.sex = random(sex);
   let genesKeys = Object.keys(genetics);
   for(let i = 0; i < genesKeys.length; i++){
@@ -64,7 +79,6 @@ Oujabe.prototype.getPhenotype = function(){
     this.checkLetality;
   }
   this.colorSet = pigmentation[this.phenotype];
-  this.analysePattern();
 }
 
 //locusR()
@@ -135,11 +149,13 @@ Oujabe.prototype.locusC = function(){
   //C is dominant
   if(locusC.indexOf("C") !== -1){
     this.phenotype += "C";
+    this.violet = false;
   }
   //V is codominant with c but dominant over y
   else if(locusC.indexOf("V") !== -1){
     //V is partially dominant with c
     this.pattern += "V";
+    this.violet = true;
     if(locusC.indexOf("c") !== -1){
       //the resulting "v" phenotype is called lilac
       this.phenotype += "v";
@@ -150,6 +166,7 @@ Oujabe.prototype.locusC = function(){
     }
   }
   else if(locusC.indexOf("Y") !== -1){
+    this.violet = false;
     //Y is partially dominant with c
     if(locusC.indexOf("c") !== -1){
       //the resulting "y" phenotype is called cream
@@ -162,6 +179,7 @@ Oujabe.prototype.locusC = function(){
   }
   //c is recessive
   else{
+    this.violet = false;
     this.phenotype += "c";
     this.albino = true;
   }
@@ -197,13 +215,15 @@ Oujabe.prototype.locusD = function(){
 //is responsible for the presence of absence of a black mask, is either B (no mask) or b (mask)
 Oujabe.prototype.locusB = function(){
   let locusB = this.genes.locusB.toString();
-  //B is simple dominant
-  if(locusB.indexOf("B") !== -1){
+  //b is simple dominant over the standard patternless B
+  if(locusB.indexOf("b") !== -1){
     //B doesn't affect the color but its distribution, so its phenotype is written on the pattern attribute
-    this.pattern += "B";
+    this.pattern += "b";
+    this.mask = true;
   }
   else{
-    this.pattern += "b";
+    this.pattern += "B";
+    this.mask = false;
   }
 }
 
@@ -288,18 +308,6 @@ Oujabe.prototype.textGenesAndPhenotype = function(name,x,y){
   let genesKeys = Object.keys(genetics);
   for(i=0; i < genesKeys.length; i++){
     text(`${genesKeys[i]}: ${this.genes[genesKeys[i]].toString()}`, x,y+40+20*i);
-  }
-}
-
-//analysePattern()
-//
-//parses the pattern string to set the relevant properties to the right boolean
-Oujabe.prototype.analysePattern = function(){
-  if(this.pattern.indexOf("b") !== -1){
-    this.mask = true;
-  }
-  if(this.pattern.indexOf("V") !== -1){
-    this.violet = true;
   }
 }
 
