@@ -32,35 +32,57 @@ let phenotype = [
 
 //an array to hold the images
 let images = [];
+let pictures = [];
+let context;
 
 $(document).ready(function(){
   //here i'm hopefully creating a canvas
   let canv = document.createElement('canvas');
   $(canv)
      .attr('id', 'canvas')
-     .width(6000)
-     .height(2400)
      .appendTo('body');
 
-  let context = canv.getContext("2d");
+  canv.width = 6000;
+  canv.height = 2400;
+
+  context = canv.getContext("2d");
 
   //creating an array of images
-  let pictures = [
+  pictures = [
     new Image(),
     new Image()
   ]
   //giving them sources
   pictures[0].src = 'assets/images/oujabeRdarkface.png';
   pictures[1].src = 'assets/images/oujabeBdarkface.png';
-  //I need an id with the images so I made an array of objects with the id and the images
-  //I figure I could make these seperate arrays if that's part of the issue
+  //this is an array with the pictures and their id
   images = [
     {phen:"RF", picture: pictures[0]},
     {phen:"rF", picture: pictures[1]}
   ]
+
+  //loop through the pictures to ensure they are all loaded
+  for(let i = 0; i < pictures.length; i++){
+    $(pictures[0]).on("load", imagesAllLoaded);
+  }
+})
+
+//this variable is used to count the number of images that have loaded
+let imageLoaded = 0;
+
+//imagesAllLoaded()
+//
+//increments the imageLoaded variable and calls analyseImages when imageLoaded is equal to the number of images
+function imagesAllLoaded(){
+  imageLoaded ++;
+  if(imageLoaded === pictures.length){
+    analyseImages();
+  }
+}
+
+function analyseImages(){
   //basically this program is trying to build a json file in a kinda ugly way
   let futureJSON = "{"
-  //for each image
   for(let i=0; i<images.length; i++){
     //I draw the image to the canvas
     //this is where it starts being problematic, the image is not loaded yet when it gets to this step
@@ -96,7 +118,7 @@ $(document).ready(function(){
     }
   }
   console.log(futureJSON);
-})
+}
 
 function rgbToHex(rgb) {
   let hex = Number(rgb).toString(16);
