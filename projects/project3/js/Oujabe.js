@@ -136,7 +136,7 @@ Oujabe.prototype.locusC = function(){
   if(locusC.indexOf("C") !== -1){
     this.phenotype += "C";
   }
-  //V is codominant with c and y
+  //V is codominant with c but dominant over y
   else if(locusC.indexOf("V") !== -1){
     //V is partially dominant with c
     this.pattern += "V";
@@ -144,9 +144,6 @@ Oujabe.prototype.locusC = function(){
       //the resulting "v" phenotype is called lilac
       this.phenotype += "v";
       this.albino = true;
-    }
-    else if(locusC.indexOf("Y") !== -1){
-      this.phenotype += "x"
     }
     else{
       this.phenotype += "V";
