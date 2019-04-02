@@ -55,14 +55,11 @@ function setup(){
   father.generateRandom("m");
   child = new Oujabe();
   child.breed(mother, father);
-  // //to test that tint works the right way
-  // tint("#549b2c");
-  // image(body,15,200);
-  //to display the phenotypes and the genes
-  //this is only for the prototype so I'm not console.log-ing the proof that i'Ve done work
-  mother.textGenesAndPhenotype("mother",15,15);
-  father.textGenesAndPhenotype("father",115,15);
-  child.textGenesAndPhenotype("child",215,15);
-  console.log(pigmentation[child.phenotype]);
-  child.display(15,200);
+
+  mother.textGenesAndPhenotype("MOTHER",15,110);
+  mother.display(40,15);
+  father.textGenesAndPhenotype("FATHER",15,410);
+  father.display(40,315);
+  child.textGenesAndPhenotype("CHILD",515,110);
+  child.display(540,15);
 }
