@@ -16,7 +16,7 @@ let pixelX = [513,610,394,282,154,537,187,198,136];
 let pixelY = [313,507,396,69,147,220,283,576,97];
 
 //variables to hold the number of columns and lines
-let columns = 6;
+let columns = 7;
 let lines = 4;
 //variables to hold the distance between columns and lines
 let distanceX = 1000;
@@ -24,10 +24,10 @@ let distanceY = 600;
 
 //this variable is for the phenotype names of each little creature in the image from which we extract colors
 let phenotype = [
-  "yc","Yy","YC","Yv","yy","yN",
-  "yCD","YYD","YCD","YVD","yYD","YxD",
-  "yCd","YYd","YCd","YVd","yYd","Yxd",
-  "yCa","YYa","YCa","YVa","yYa","Yxd"
+  "yc","Yy","Yc","Yv","yy","yN","yN",
+  "yCD","YYD","YCD","YVD","yYD","YxD","yxD",
+  "yCd","YYd","YCd","YVd","yYd","Yxd","yxd",
+  "yCa","YYa","YCa","YVa","yYa","Yxa","yxa"
 ]
 
 //an array to hold the images

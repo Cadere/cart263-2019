@@ -80,28 +80,6 @@ Oujabe.prototype.locusR = function(){
   }
 }
 
-
-
-Oujabe.prototype.simpleDominance = function(locusX, stringA, stringB, phenotype, pattern){
-  let locus = locusX.toString();
-  if(locus.indexOf(stringA) !== -1){
-    if(phenotype){
-      this.phenotype += stringA;
-    }
-    if(pattern){
-      this.pattern += stringA;
-    }
-  }
-  else{
-    if(phenotype){
-      this.phenotype += stringB;
-    }
-    if(pattern){
-      this.pattern += stringB;
-    }
-  }
-}
-
 //locusF()
 //
 //analyses the F locus to determine the phenotype
@@ -156,9 +134,11 @@ Oujabe.prototype.locusC = function(){
   //V is codominant with c and y
   else if(locusC.indexOf("V") !== -1){
     //V is partially dominant with c
+    this.pattern += "V";
     if(locusC.indexOf("c") !== -1){
       //the resulting "v" phenotype is called lilac
       this.phenotype += "v";
+      this.albino = true;
     }
     else if(locusC.indexOf("Y") !== -1){
       this.phenotype += "x"
@@ -172,6 +152,7 @@ Oujabe.prototype.locusC = function(){
     if(locusC.indexOf("c") !== -1){
       //the resulting "y" phenotype is called cream
       this.phenotype += "y";
+      this.albino = true;
     }
     else{
       this.phenotype += "Y";

@@ -7,16 +7,43 @@ Eugene N. Fournier
 
 
 ******************/
-let genetics;
 let mother;
 let father;
 let child;
 
+//variables for the json files
+let genetics;
+let pigmentation;
+
+//variables for the body parts
+let accent;
 let body;
+let eye;
+let head;
+let hoof;
+let leg;
+let mask;
+let stomach;
+let violet;
+let whiter;
+let whiteR;
 
 function preload(){
+  //preload the JSON files
   genetics = loadJSON("data/genetics.json");
+  pigmentation = loadJSON("data/pigmentation.json")
+  //preload the body images
+  accent = loadImage("assets/images/accent.png");
   body = loadImage("assets/images/body.png");
+  eye = loadImage("assets/images/eye.png");
+  head = loadImage("assets/images/head.png");
+  hoof = loadImage("assets/images/hoof.png");
+  leg = loadImage("assets/images/leg.png");
+  mask = loadImage("assets/images/mask.png");
+  stomach = loadImage("assets/images/stomach.png");
+  violet = loadImage("assets/images/violet.png");
+  whiter = loadImage("assets/images/whiteb.png");
+  whiteR = loadImage("assets/images/whiteR.png");
 }
 
 function setup(){
@@ -36,4 +63,5 @@ function setup(){
   mother.textGenesAndPhenotype("mother",15,15);
   father.textGenesAndPhenotype("father",115,15);
   child.textGenesAndPhenotype("child",215,15);
+  console.log(pigmentation[child.phenotype]);
 }
