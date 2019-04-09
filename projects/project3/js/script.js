@@ -32,6 +32,13 @@ let stomach;
 let violet;
 let whiter;
 let whiteR;
+//variables for the white spotting variables
+let sHeadSpeckle = [];
+let sHeadMantle = [];
+let sHeadLeuc = [];
+let sSpeckle = [];
+let sMantle = [];
+let sLeuc = [];
 
 function preload(){
   //preload the JSON files
@@ -49,6 +56,35 @@ function preload(){
   violet = loadImage("assets/images/violet.png");
   whiter = loadImage("assets/images/whiteb.png");
   whiteR = loadImage("assets/images/whiteR.png");
+  sHeadLeuc = [
+    loadImage("assets/images/sho2.png"),
+    loadImage("assets/images/sho3.png")
+  ];
+  sHeadMantle = [
+    loadImage("assets/images/shm1.png"),
+    loadImage("assets/images/shm2.png"),
+    loadImage("assets/images/shm3.png")
+  ];
+  sHeadSpeckle = [
+    loadImage("assets/images/shi1.png"),
+    loadImage("assets/images/shi2.png"),
+    loadImage("assets/images/shi3.png")
+  ];
+  sLeuc = [
+    loadImage("assets/images/so2.png"),
+    loadImage("assets/images/so3.png")
+  ];
+  sMantle = [
+    loadImage("assets/images/sm1.png"),
+    loadImage("assets/images/sm2.png"),
+    loadImage("assets/images/sm3.png")
+  ];
+  sSpeckle = [
+    loadImage("assets/images/si1.png"),
+    loadImage("assets/images/si2.png"),
+    loadImage("assets/images/si3.png")
+  ];
+
 }
 
 function setup(){

@@ -1,5 +1,6 @@
 //some variables for the oujabe constructor
 let sex = ["m","f"];
+let spotColor = ["#f5eb4e","#e1e593","#dee6a6"];
 
 //Oujabe constructor
 //
@@ -15,9 +16,13 @@ function Oujabe(){
   this.albino = false;
   this.genes = {};
   //these variables will be used to display the proper images to reflect the pattern genes present
+  this.red = true;
   this.mask = false;
   this.violet = false;
   this.colorSet;
+  this.spot = true;
+  this.bodySpots;
+  this.headSpots;
 }
 
 //parametersReset();
@@ -29,8 +34,11 @@ Oujabe.prototype.parametersReset = function(){
   this.letality = false;
   this.albino = false;
   this.genes = {};
+  this.red = true;
   this.mask = false;
   this.violet = false;
+  this.spot = true;
+  this.spotColor;
 }
 
 //generateRandom();
@@ -74,8 +82,12 @@ Oujabe.prototype.getPhenotype = function(){
     this.locusD();
     this.locusB();
     this.locusS();
+    if(this.spot){
+      this.pickSpots();
+    }
   }
   else{
+    this.spot = false;
     this.checkLetality;
   }
   this.colorSet = pigmentation[this.phenotype];
@@ -92,10 +104,12 @@ Oujabe.prototype.locusR = function(){
     this.phenotype += "R";
     //R affects both the colors and their repartition
     this.pattern += "R";
+    this.red = true;
   }
   else{
     this.phenotype += "r";
     this.pattern += "r";
+    this.red = false;
   }
 }
 
@@ -109,14 +123,17 @@ Oujabe.prototype.locusF = function(){
   //F is dominant
   if(locusF.indexOf("F") !== -1){
     this.phenotype += "F";
+    this.spotColor = spotColor[0];
   }
   //b is recessive to F but dominant over w
   else if(locusF.indexOf("b") !== -1){
     this.phenotype += "b";
+    this.spotColor = spotColor[1];
   }
   //w is recessive
   else{
     this.phenotype += "w";
+    this.spotColor = spotColor[2];
   }
 }
 
@@ -248,7 +265,7 @@ Oujabe.prototype.locusS = function(){
       this.pattern += "s";
     }
     else{
-      this.pattern += "S";
+      this.spot = false;
     }
   }
   else if(locusS.indexOf("m") !== -1){
@@ -280,6 +297,34 @@ Oujabe.prototype.locusS = function(){
     this.pattern += "ss"
     //ss is homozygous lethal
     this.letality = true;
+  }
+}
+
+//pickSpots()
+//
+//assigns spot images to the oujabe
+Oujabe.prototype.pickSpots = function(){
+  let value = Math.floor(random(2));
+  let valueHomo = value+1;
+  if(this.pattern.indexOf("m") == -1){
+    this.bodySpots = sMantle[value];
+    this.headSpots = sHeadMantle[value];
+  }
+  if(this.pattern.indexOf("M") == -1){
+    this.bodySpots = sMantle[valueHomo];
+    this.headSpots = sHeadMantle[valueHomo];
+  }
+  if(this.pattern.indexOf("i") == -1){
+    this.bodySpots = sSpeckle[value];
+    this.headSpots = sHeadSpeckle[value];
+  }
+  if(this.pattern.indexOf("I") == -1){
+    this.bodySpots = sSpeckle[valueHomo];
+    this.headSpots = sHeadSpeckle[valueHomo];
+  }
+  if(this.pattern.indexOf("s") == -1){
+    this.bodySpots = sLeuc[value];
+    this.headSpots = sHeadLeuc[value];
   }
 }
 
@@ -330,6 +375,11 @@ Oujabe.prototype.display = function(x,y){
     image(violet, x, y);
     noTint();
   }
+  if(this.spot){
+    tint(this.spotColor);
+    image(this.bodySpots,x,y);
+    noTint();
+  }
   tint(this.colorSet[3]);
   image(head, x, y);
   noTint();
@@ -344,6 +394,13 @@ Oujabe.prototype.display = function(x,y){
   }
   else{
     image(whiteR, x, y);
+  }
+  if(this.spot){
+    if(this.red){
+      tint(this.colorSet[3]);
+    }
+    image(this.headSpots,x,y);
+    noTint();
   }
   tint(this.colorSet[7]);
   image(hoof, x, y);
