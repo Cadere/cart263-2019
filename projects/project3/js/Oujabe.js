@@ -390,17 +390,18 @@ Oujabe.prototype.display = function(x,y){
     tint(this.colorSet[6]);
     image(mask, x, y);
     noTint();
+    if(this.spot && this.red){
+      tint(this.colorSet[3]);
+      image(this.headSpots,x,y);
+      noTint();
+    }
     image(whiter, x,y);
   }
   else{
     image(whiteR, x, y);
   }
-  if(this.spot){
-    if(this.red){
-      tint(this.colorSet[3]);
-    }
+  if(this.spot && !this.red){
     image(this.headSpots,x,y);
-    noTint();
   }
   tint(this.colorSet[7]);
   image(hoof, x, y);
