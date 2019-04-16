@@ -16,6 +16,18 @@ let motherButton;
 let fatherButton;
 let childButton;
 
+//menus
+let motherMenu;
+let loci = {
+  locusR:["R","r"],
+  locusF:["F","b","w"],
+  locusY:["Y","y"],
+  locusC:["C","V","Y","c"],
+  locusD:["D","d"],
+  locusB:["B","b"],
+  locusS:["S","m","i","s"]
+}
+
 //variables for the json files
 let genetics;
 let pigmentation;
@@ -107,6 +119,7 @@ function setup(){
   motherButton = new Button(300,20,"New Mother",mother);
   fatherButton = new Button(300,320,"New Father",father);
   childButton = new Button(800,20, "Breed Again",child);
+  motherMenu = new Menu(mother,loci);
 }
 
 function draw(){
@@ -118,6 +131,7 @@ function draw(){
   father.display(40,315);
   child.textGenesAndPhenotype("CHILD",515,110);
   child.display(540,15);
+  motherMenu.display();
   explanation();
   motherButton.display();
   fatherButton.display();

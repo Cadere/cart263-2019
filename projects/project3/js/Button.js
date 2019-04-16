@@ -27,7 +27,7 @@ Button.prototype.clicked = function(child){
       this.oujabe.breed(mother, father);
     }
     else{
-    this.oujabe.generateRandom();      
+    this.oujabe.generateRandom();
     }
   }
 }
