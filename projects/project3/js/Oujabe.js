@@ -1,6 +1,6 @@
 //some variables for the oujabe constructor
 let sex = ["m","f"];
-let spotColor = ["#f5eb4e","#e1e593","#dee6a6"];
+let spotColor = ["#f5eb4e","#e1e593","#e5efc0"];
 
 //Oujabe constructor
 //

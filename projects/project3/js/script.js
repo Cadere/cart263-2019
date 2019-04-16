@@ -40,8 +40,14 @@ let sHeadLeuc = [];
 let sSpeckle = [];
 let sMantle = [];
 let sLeuc = [];
+//variables for the fonts
+var ttLakes;
+var ttLakesBold;
 
 function preload(){
+  //preload the fonts
+  ttLakes =loadFont("assets/fonts/ttLakesMedium.ttf")
+  ttLakesBold = loadFont("assets/fonts/ttLakesBold.ttf");
   //preload the JSON files
   genetics = loadJSON("data/genetics.json");
   pigmentation = loadJSON("data/pigmentation.json")
@@ -105,6 +111,7 @@ function setup(){
 
 function draw(){
   background(255);
+  textFont(ttLakes);
   mother.textGenesAndPhenotype("MOTHER",15,110);
   mother.display(40,15);
   father.textGenesAndPhenotype("FATHER",15,410);
