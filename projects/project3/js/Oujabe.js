@@ -28,26 +28,39 @@ function Oujabe(){
 //parametersReset();
 //
 //sets the parameters back to the default values
-Oujabe.prototype.parametersReset = function(){
+Oujabe.prototype.parametersReset = function(boolean,spot){
+  if(boolean){
+    this.genes = {};
+  }
   this.phenotype = "";
   this.pattern = "";
   this.letality = false;
   this.albino = false;
-  this.genes = {};
   this.red = true;
   this.mask = false;
   this.violet = false;
   this.spot = true;
   this.spotColor;
-  this.bodySpots = [];
-  this.headSpots = [];
+  if(spot){
+    this.bodySpots = [];
+    this.headSpots = [];
+  }
+}
+
+//parametersUpdate();
+//
+//allows the parameters to update dynamically when they are changed through the drop down menu
+Oujabe.prototype.parametersUpdate = function(locus, position, value, spot){
+  this.parametersReset(false, spot);
+  locus[position] = value;
+  this.getPhenotype();
 }
 
 //generateRandom();
 //
 //Creates a brand new oujabe randomly
 Oujabe.prototype.generateRandom = function(mOrF){
-  this.parametersReset();
+  this.parametersReset(true,true);
   if(!mOrF){
     this.sex = random(sex);
   }
@@ -62,7 +75,7 @@ Oujabe.prototype.generateRandom = function(mOrF){
 }
 
 Oujabe.prototype.breed = function(mother, father){
-  this.parametersReset();
+  this.parametersReset(true,true);
   this.sex = random(sex);
   let genesKeys = Object.keys(genetics);
   for(let i = 0; i < genesKeys.length; i++){
