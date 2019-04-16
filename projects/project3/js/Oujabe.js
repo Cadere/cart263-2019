@@ -21,8 +21,8 @@ function Oujabe(){
   this.violet = false;
   this.colorSet;
   this.spot = true;
-  this.bodySpots;
-  this.headSpots;
+  this.bodySpots = [];
+  this.headSpots =  [];
 }
 
 //parametersReset();
@@ -39,6 +39,8 @@ Oujabe.prototype.parametersReset = function(){
   this.violet = false;
   this.spot = true;
   this.spotColor;
+  this.bodySpots = [];
+  this.headSpots = [];
 }
 
 //generateRandom();
@@ -306,25 +308,25 @@ Oujabe.prototype.locusS = function(){
 Oujabe.prototype.pickSpots = function(){
   let value = Math.floor(random(2));
   let valueHomo = value+1;
-  if(this.pattern.indexOf("m") == -1){
-    this.bodySpots = sMantle[value];
-    this.headSpots = sHeadMantle[value];
+  if(this.pattern.indexOf("m") !== -1){
+    this.bodySpots.push(sMantle[valueHomo]);
+    this.headSpots.push(sHeadMantle[valueHomo]);
   }
-  if(this.pattern.indexOf("M") == -1){
-    this.bodySpots = sMantle[valueHomo];
-    this.headSpots = sHeadMantle[valueHomo];
+  if(this.pattern.indexOf("M") !== -1){
+    this.bodySpots.push(sMantle[value]);
+    this.headSpots.push(sHeadMantle[value]);
   }
-  if(this.pattern.indexOf("i") == -1){
-    this.bodySpots = sSpeckle[value];
-    this.headSpots = sHeadSpeckle[value];
+  if(this.pattern.indexOf("i") !== -1){
+    this.bodySpots.push(sSpeckle[valueHomo]);
+    this.headSpots.push(sHeadSpeckle[valueHomo]);
   }
-  if(this.pattern.indexOf("I") == -1){
-    this.bodySpots = sSpeckle[valueHomo];
-    this.headSpots = sHeadSpeckle[valueHomo];
+  if(this.pattern.indexOf("I") !== -1){
+    this.bodySpots.push(sSpeckle[value]);
+    this.headSpots.push(sHeadSpeckle[value]);
   }
-  if(this.pattern.indexOf("s") == -1){
-    this.bodySpots = sLeuc[value];
-    this.headSpots = sHeadLeuc[value];
+  if(this.pattern.indexOf("s") !== -1){
+    this.bodySpots.push(sLeuc[value]);
+    this.headSpots.push(sHeadLeuc[value]);
   }
 }
 
@@ -375,10 +377,17 @@ Oujabe.prototype.display = function(x,y){
     image(violet, x, y);
     noTint();
   }
-  if(this.spot){
-    tint(this.spotColor);
-    image(this.bodySpots,x,y);
+  if(this.mask){
+    tint(this.colorSet[6]);
+    image(maskLeg, x, y);
     noTint();
+  }
+  if(this.spot){
+    for (let i = 0; i < this.bodySpots.length; i++){
+      tint(this.spotColor);
+      image(this.bodySpots[i],x,y);
+      noTint();
+    }
   }
   tint(this.colorSet[3]);
   image(head, x, y);
@@ -391,9 +400,11 @@ Oujabe.prototype.display = function(x,y){
     image(mask, x, y);
     noTint();
     if(this.spot && this.red){
-      tint(this.colorSet[3]);
-      image(this.headSpots,x,y);
-      noTint();
+      for(let i = 0; i < this.headSpots.length; i++){
+        tint(this.colorSet[3]);
+        image(this.headSpots[i],x,y);
+        noTint();
+      }
     }
     image(whiter, x,y);
   }
@@ -401,7 +412,9 @@ Oujabe.prototype.display = function(x,y){
     image(whiteR, x, y);
   }
   if(this.spot && !this.red){
-    image(this.headSpots,x,y);
+    for(let i = 0; i < this.headSpots.length; i++){
+      image(this.headSpots[i],x,y);
+    }
   }
   tint(this.colorSet[7]);
   image(hoof, x, y);

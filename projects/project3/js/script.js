@@ -28,6 +28,7 @@ let head;
 let hoof;
 let leg;
 let mask;
+let maskLeg;
 let stomach;
 let violet;
 let whiter;
@@ -52,6 +53,7 @@ function preload(){
   hoof = loadImage("assets/images/hoof.png");
   leg = loadImage("assets/images/leg.png");
   mask = loadImage("assets/images/mask.png");
+  maskLeg = loadImage("assets/images/maskLeg.png");
   stomach = loadImage("assets/images/stomach.png");
   violet = loadImage("assets/images/violet.png");
   whiter = loadImage("assets/images/whiteb.png");
