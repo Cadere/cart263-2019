@@ -18,6 +18,9 @@ let childButton;
 
 //menus
 let motherMenu;
+let fatherMenu;
+
+//information for the menu's display
 let loci = {
   locusR:["R","r"],
   locusF:["F","b","w"],
@@ -110,7 +113,7 @@ function preload(){
 }
 
 function setup(){
-  createCanvas(1000,600);
+  createCanvas(windowWidth,windowHeight);
   background(255);
   mother = new Oujabe();
   mother.generateRandom("f");
@@ -118,26 +121,22 @@ function setup(){
   father.generateRandom("m");
   child = new Oujabe();
   child.breed(mother, father);
-  motherButton = new Button(300,20,"New Mother",mother);
-  fatherButton = new Button(300,320,"New Father",father);
-  childButton = new Button(800,20, "Breed Again",child);
-  motherMenu = new Menu(mother,loci,25,250,"mother");
+  childButton = new Button(500,600, "Breed Again",child);
+  motherMenu = new Menu(mother,loci,25,50,"mother");
   motherMenu.setup();
+  fatherMenu = new Menu(father, loci, 550,50,"father");
+  fatherMenu.setup();
 }
 
 function draw(){
   background(255);
   textFont(ttLakes);
-  mother.textGenesAndPhenotype("MOTHER",15,110);
-  mother.display(40,15);
-  father.textGenesAndPhenotype("FATHER",15,410);
-  father.display(40,315);
-  child.textGenesAndPhenotype("CHILD",515,110);
-  child.display(540,15);
+  mother.display(40,110);
+  father.display(565,110);
+  child.display(40,450);
   motherMenu.display();
+  fatherMenu.display();
   explanation();
-  motherButton.display();
-  fatherButton.display();
   childButton.display();
 }
 
@@ -151,12 +150,10 @@ Locus C can dilute the amount of melanin,
 Locus D is the locus of hypermelanism;
 Locus B determines if there is a black mask;
 Locus S is not yet implemented.`
-  text(explanation, 515, 410);
+  text(explanation, 515, 450);
 }
 
 function mouseClicked(){
-  motherButton.clicked();
-  fatherButton.clicked();
   childButton.clicked(child);
   motherMenu.handleImput();
 }
