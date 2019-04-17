@@ -21,7 +21,10 @@ function Menu(animal, loci, x, y){
   this.y = y;
   this.bgFill = "#c3e0af";
   this.buttons = [];
+  this.resetButton;
   this.buttonSize = 15;
+  this.heigth = 70;
+  this.width;
 }
 //x,y,width,heigth,animal,locus,position,value,spot
 Menu.prototype.setup = function(){
@@ -33,12 +36,14 @@ Menu.prototype.setup = function(){
       if(this.titles[i] === "locusS"){
         spot = true;
       }
-      this.buttons.push(new MenuButton(itX,itY+5,this.buttonSize,this.buttonSize,this.animal,this.titles[i],0,this.loci[this.titles[i]][j],spot));
-      this.buttons.push(new MenuButton(itX,itY+25,this.buttonSize,this.buttonSize,this.animal,this.titles[i],1,this.loci[this.titles[i]][j],spot));
+      this.buttons.push(new MenuButton(itX,itY+5,this.buttonSize,this.buttonSize,this.animal,this.loci[this.titles[i]][j],this.titles[i],0,spot));
+      this.buttons.push(new MenuButton(itX,itY+25,this.buttonSize,this.buttonSize,this.animal,this.loci[this.titles[i]][j],this.titles[i],1,spot));
       itX+=20;
     }
     itX+=15;
   }
+  this.resetButton = new MenuButton(itX-10,itY-5,this.buttonSize,this.buttonSize*3,this.animal,"N\nE\nW");
+  this.width = itX;
 }
 
 Menu.prototype.display = function(){
@@ -48,7 +53,7 @@ Menu.prototype.display = function(){
   push();
   noStroke();
   fill(this.bgFill);
-  rect(itX-10,itY-15,485,70);
+  rect(itX-10,itY-20,this.width,this.heigth);
   pop();
   for(let i = 0; i < this.titles.length; i++){
     push();
@@ -57,18 +62,6 @@ Menu.prototype.display = function(){
     text(this.titles[i],itX,itY);
     pop();
     for(let j = 0; j < this.loci[this.titles[i]].length; j++){
-      // push();
-      // noStroke();
-      // this.setFill(i,j,0);
-      // rect(itX,itY+5,15,15);
-      // this.setFill(i,j,1);
-      // rect(itX,itY+30,15,15);
-      // pop();
-      // push();
-      // textAlign(LEFT, TOP);
-      // text(this.loci[this.titles[i]][j], itX+4, itY+5);
-      // text(this.loci[this.titles[i]][j], itX+4, itY+30);
-      // pop();
       itX+=20;
     }
     itX+=15;
@@ -79,10 +72,12 @@ Menu.prototype.display = function(){
     this.buttons[i].display();
     pop();
   }
+  this.resetButton.display();
 }
 
 Menu.prototype.handleImput = function(){
   for(let i = 0; i < this.buttons.length; i++){
     this.buttons[i].clicked();
   }
+  this.resetButton.resetClicked();
 }
