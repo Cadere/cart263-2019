@@ -53,12 +53,14 @@ let sSpeckle = [];
 let sMantle = [];
 let sLeuc = [];
 //variables for the fonts
-var ttLakes;
-var ttLakesBold;
+let ttLakes;
+let ttLakesLight;
+let ttLakesBold;
 
 function preload(){
   //preload the fonts
-  ttLakes =loadFont("assets/fonts/ttLakesMedium.ttf")
+  ttLakes = loadFont("assets/fonts/ttLakesMedium.ttf")
+  ttLakesLight = loadFont("assets/fonts/ttLakesLight.otf")
   ttLakesBold = loadFont("assets/fonts/ttLakesBold.ttf");
   //preload the JSON files
   genetics = loadJSON("data/genetics.json");
@@ -119,7 +121,7 @@ function setup(){
   motherButton = new Button(300,20,"New Mother",mother);
   fatherButton = new Button(300,320,"New Father",father);
   childButton = new Button(800,20, "Breed Again",child);
-  motherMenu = new Menu(mother,loci,25,250);
+  motherMenu = new Menu(mother,loci,25,250,"mother");
   motherMenu.setup();
 }
 

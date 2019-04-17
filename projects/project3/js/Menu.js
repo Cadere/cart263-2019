@@ -1,29 +1,19 @@
 //Menu constructor
 //
 //The menu is used to manually change genes for an oujabe
-// let loci = {
-//   locusR:["R","r"],
-//   locusF:["F","b","w"],
-//   locusY:["Y","y"],
-//   locusC:["C","V","Y","c"],
-//   locusD:["D","d"],
-//   locusB:["B","b"],
-//   locusS:["S","m","i","s"]
-// }
 
-// let lociTitles =  Object.keys(loci);
-
-function Menu(animal, loci, x, y){
+function Menu(animal, loci, x, y, name){
   this.animal = animal;
   this.loci = loci;
   this.titles = Object.keys(this.loci);
   this.x = x;
   this.y = y;
+  this.name = name;
   this.bgFill = "#c3e0af";
   this.buttons = [];
   this.resetButton;
   this.buttonSize = 15;
-  this.heigth = 70;
+  this.heigth = 90;
   this.width;
 }
 //x,y,width,heigth,animal,locus,position,value,spot
@@ -53,7 +43,13 @@ Menu.prototype.display = function(){
   push();
   noStroke();
   fill(this.bgFill);
-  rect(itX-10,itY-20,this.width,this.heigth);
+  rect(itX-10,itY-40,this.width,this.heigth);
+  fill(0);
+  textSize(18);
+  textFont(ttLakesLight);
+  text(`${this.name}`, itX, itY-24);
+  textSize(14);
+  text(`phenotype: ${this.animal.phenotype}             pattern: ${this.animal.pattern}`, itX+80, itY-24)
   pop();
   for(let i = 0; i < this.titles.length; i++){
     push();
