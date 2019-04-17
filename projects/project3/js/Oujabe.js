@@ -363,12 +363,15 @@ Oujabe.prototype.checkLetality = function(){
 //displays the genes and the phenotypes as text
 //this only exists for this prototype
 Oujabe.prototype.textGenesAndPhenotype = function(name,x,y){
+  push();
+  fill(200);
   text(name,x,y);
   text(this.phenotype+" "+this.pattern, x, y+20);
   let genesKeys = Object.keys(genetics);
   for(i=0; i < genesKeys.length; i++){
     text(`${genesKeys[i]}: ${this.genes[genesKeys[i]].toString()}`, x,y+40+20*i);
   }
+  pop();
 }
 
 //display()

@@ -119,7 +119,8 @@ function setup(){
   motherButton = new Button(300,20,"New Mother",mother);
   fatherButton = new Button(300,320,"New Father",father);
   childButton = new Button(800,20, "Breed Again",child);
-  motherMenu = new Menu(mother,loci);
+  motherMenu = new Menu(mother,loci,25,250);
+  motherMenu.setup();
 }
 
 function draw(){
@@ -155,6 +156,7 @@ function mouseClicked(){
   motherButton.clicked();
   fatherButton.clicked();
   childButton.clicked(child);
+  motherMenu.handleImput();
 }
 
 function newMother(){
