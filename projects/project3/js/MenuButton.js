@@ -1,14 +1,15 @@
 //MenuButton constructor
 //
 //builds a button for the menu
-function MenuButton(x,y,width,heigth,animal,locus,position,value,spot){
+function MenuButton(x,y,width,heigth,animal,locusName,position,value,spot){
   this.x = x;
   this.y = y;
   this.value = value;
   this.width = width;
   this.heigth = heigth;
   this.animal = animal;
-  this.locus = locus;
+  this.locusName = locusName;
+  this.locus = this.animal.genes[this.locusName];
   this.position = position;
   this.spot = spot;
   this.idleFill = "#f4ffed";
@@ -31,13 +32,13 @@ MenuButton.prototype.display = function(){
 
 MenuButton.prototype.clicked = function(){
   if(mouseX > this.x && mouseX < this.x+this.width && mouseY > this.y && mouseY < this.y+this.heigth){
-    this.animal.parametersUpdate(this.locus,this.position,this.value,this.spot)
+    this.animal.parametersUpdate(this.locus,this.position,this.value,this.spot);
   }
 }
 
 MenuButton.prototype.setFill = function(){
   this.activeFill = this.animal.colorSet[3];
-  if(this.animal.genes[this.locus][this.position] === this.value){
+  if(this.animal.genes[this.locusName][this.position] === this.value){
     this.currentFill = this.activeFill;
   }
   else{
