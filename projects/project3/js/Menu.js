@@ -13,7 +13,7 @@ function Menu(animal, loci, x, y, name){
   this.buttons = [];
   this.resetButton;
   this.buttonSize = 15;
-  this.heigth = 90;
+  this.heigth = 400;
   this.width;
 }
 //x,y,width,heigth,animal,locus,position,value,spot
@@ -44,6 +44,8 @@ Menu.prototype.display = function(){
   noStroke();
   fill(this.bgFill);
   rect(itX-10,itY-40,this.width,this.heigth);
+  fill(255);
+  rect(itX, itY+50, this.width-20, 300)
   fill(0);
   textSize(18);
   textFont(ttLakesLight);

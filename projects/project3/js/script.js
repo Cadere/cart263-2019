@@ -131,11 +131,11 @@ function setup(){
 function draw(){
   background(255);
   textFont(ttLakes);
+  motherMenu.display();
+  fatherMenu.display();
   mother.display(40,110);
   father.display(565,110);
   child.display(40,450);
-  motherMenu.display();
-  fatherMenu.display();
   explanation();
   childButton.display();
 }
