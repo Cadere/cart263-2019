@@ -33,7 +33,7 @@ Menu.prototype.setup = function(){
     itX+=15;
   }
   this.resetButton = new MenuButton(itX-10,itY-5,this.buttonSize,this.buttonSize*3,this.animal,"N\nE\nW");
-  this.width = itX;
+  this.width = itX - this.x + 25;
 }
 
 Menu.prototype.display = function(){

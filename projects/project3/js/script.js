@@ -156,6 +156,7 @@ Locus S is not yet implemented.`
 function mouseClicked(){
   childButton.clicked(child);
   motherMenu.handleImput();
+  fatherMenu.handleImput();
 }
 
 function newMother(){
