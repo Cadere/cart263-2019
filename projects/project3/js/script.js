@@ -100,7 +100,7 @@ function preload(){
     loadImage("assets/images/so3.png")
   ];
   sMantle = [
-    // loadImage("assets/images/sm1.png"),
+    loadImage("assets/images/sm1.png"),
     loadImage("assets/images/sm2.png"),
     loadImage("assets/images/sm3.png")
   ];
