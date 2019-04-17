@@ -11,15 +11,19 @@ function MenuButton(x,y,width,heigth,animal,locus,position,value,spot){
   this.locus = locus;
   this.position = position;
   this.spot = spot;
+  this.idleFill = "#f4ffed";
+  this.activeFill = this.animal.colorSet[3];
+  this.currentFill = this.idleFill;
 }
 
-MenuButton.prototype.display = function(fillColor){
+MenuButton.prototype.display = function(){
   push();
+  fill(this.currentFill);
   noStroke();
-  fill(fillColor);
   rect(this.x,this.y,this.width,this.heigth);
   pop();
   push();
+  fill(0);
   textAlign(LEFT, TOP);
   text(this.value, this.x+5, this.y);
   pop();
@@ -28,5 +32,15 @@ MenuButton.prototype.display = function(fillColor){
 MenuButton.prototype.clicked = function(){
   if(mouseX > this.x && mouseX < this.x+this.width && mouseY > this.y && mouseY < this.y+this.heigth){
     this.animal.parametersUpdate(this.locus,this.position,this.value,this.spot)
+  }
+}
+
+MenuButton.prototype.setFill = function(){
+  this.activeFill = this.animal.colorSet[3];
+  if(this.animal.genes[this.locus][this.position] === this.value){
+    this.currentFill = this.activeFill;
+  }
+  else{
+    this.currentFill = this.idleFill;
   }
 }
