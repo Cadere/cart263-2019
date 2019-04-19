@@ -19,6 +19,7 @@ let childButton;
 //menus
 let motherMenu;
 let fatherMenu;
+let childrenMenu;
 
 //information for the menu's display
 let loci = {
@@ -113,8 +114,7 @@ function preload(){
 }
 
 function setup(){
-  createCanvas(windowWidth,windowHeight);
-  background(255);
+  createCanvas(1100,750);
   mother = new Oujabe();
   mother.generateRandom("f");
   father = new Oujabe();
@@ -124,18 +124,20 @@ function setup(){
   childButton = new Button(500,600, "Breed Again",child);
   motherMenu = new Menu(mother,loci,25,50,"mother");
   motherMenu.setup();
-  fatherMenu = new Menu(father, loci, 550,50,"father");
+  fatherMenu = new Menu(father, loci, 585,50,"father");
   fatherMenu.setup();
+  childrenMenu = new ChildrenMenu(15, 435);
 }
 
 function draw(){
-  background(255);
+  background(245);
   textFont(ttLakes);
   motherMenu.display();
   fatherMenu.display();
   mother.display(40,110);
-  father.display(565,110);
+  father.display(600,110);
   child.display(40,450);
+  childrenMenu.display();
   explanation();
   childButton.display();
 }
