@@ -1,28 +1,32 @@
 //button constructor
 //
-function Button(x,y,buttonText,oujabe){
+function Button(x,y,width,height,buttonText,oujabe){
   this.x = x;
   this.y = y;
   this.buttonText = buttonText;
   this.oujabe = oujabe;
-  this.width = 80;
-  this.heigth = 20;
+  this.width = width;
+  this.height = height;
+  this.fill = "#93a586";
 }
 
 Button.prototype.display = function(){
   push();
   noStroke();
-  fill(200);
-  rect(this.x,this.y,this.width,this.heigth);
+  fill(this.fill);
+  rect(this.x,this.y,this.width,this.height);
   pop();
   push();
   textAlign(LEFT, TOP);
-  text(this.buttonText, this.x+5, this.y+5);
+  fill(255);
+  textSize(18);
+  text(this.buttonText, this.x+5, this.y);
   pop();
 }
 
 Button.prototype.clicked = function(){
   if(mouseX > this.x && mouseX < this.x+this.width && mouseY > this.y && mouseY < this.y+this.heigth){
-    this.oujabe.breed(mother, father);
+    console.log("clicked");
+    [this.oujabe].breed(mother, father);
   }
 }

@@ -132,9 +132,9 @@ function draw(){
 }
 
 function mouseClicked(){
-  childButton.clicked(child);
   motherMenu.handleImput();
   fatherMenu.handleImput();
+  childrenMenu.handleImput();
 }
 
 function newMother(){

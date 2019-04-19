@@ -13,7 +13,8 @@ function ChildrenMenu(x, y, mother, father){
   this.infoBoxFill = "#93a586";
   this.buttons = [];
   this.AllButton;
-  this.buttonSize = 15;
+  this.buttonWidth = 40;
+  this.buttonHeight = 30;
   //variables for the children
   this.numberOfChildren = 3;
   this.children = [];
@@ -35,10 +36,12 @@ function ChildrenMenu(x, y, mother, father){
 //setup()
 //
 //creates the menu, this associated animals, and its contents
+//x,y,width, height, buttonText,oujabe
 ChildrenMenu.prototype.setup = function(){
   for(let i = 0; i < this.numberOfChildren; i++){
     this.children.push(new Oujabe());
     this.children[i].breed(this.mother, this.father);
+    this.buttons.push(new Button(this.cBoxX+this.boxWidth*(i+1)-this.buttonWidth-this.edge, this.y+this.topEdge-this.buttonHeight-this.inset,this.buttonWidth,this.buttonHeight,"new",this.children[i]));
   }
 }
 
@@ -54,7 +57,8 @@ ChildrenMenu.prototype.display = function(){
   this.displayInfoBox();
   for(let i=0;i<this.numberOfChildren;i++){
     this.displayChildBox(i);
-    this.children[i].display(this.cBoxX+this.boxWidth*i+this.inset,this.y+this.topEdge*1.25,this.animalWidth,this.animalHeight)
+    this.children[i].display(this.cBoxX+this.boxWidth*i+this.inset,this.y+this.topEdge*1.25,this.animalWidth,this.animalHeight);
+    this.buttons[i].display();
   }
 }
 
@@ -93,4 +97,11 @@ ChildrenMenu.prototype.displayChildBox = function(i){
   textSize(14);
   text(`phenotype: ${this.children[i].phenotype}, pattern: ${this.children[i].pattern}`,this.cBoxX+this.boxWidth*i,this.y+this.topEdge-this.inset*2);
   pop();
+}
+
+ChildrenMenu.prototype.handleImput = function(){
+  console.log("handleImput")
+  for(let i = 0; i < this.buttons.length; i++){
+    this.buttons[i].clicked();
+  }
 }
