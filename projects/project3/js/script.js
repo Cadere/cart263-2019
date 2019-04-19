@@ -9,12 +9,6 @@ Eugene N. Fournier
 ******************/
 let mother;
 let father;
-let child;
-
-//some buttons
-let motherButton;
-let fatherButton;
-let childButton;
 
 //menus
 let motherMenu;
@@ -119,9 +113,6 @@ function setup(){
   mother.generateRandom("f");
   father = new Oujabe();
   father.generateRandom("m");
-  child = new Oujabe();
-  child.breed(mother, father);
-  childButton = new Button(500,600, "Breed Again",child);
   motherMenu = new Menu(mother,loci,25,50,"mother");
   motherMenu.setup();
   fatherMenu = new Menu(father, loci, 585,50,"father");
@@ -137,9 +128,7 @@ function draw(){
   fatherMenu.display();
   mother.display(40,110);
   father.display(600,110);
-  child.display(40,450);
   childrenMenu.display();
-  childButton.display();
 }
 
 function mouseClicked(){

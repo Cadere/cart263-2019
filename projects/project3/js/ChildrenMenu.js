@@ -86,5 +86,11 @@ ChildrenMenu.prototype.displayChildBox = function(i){
   noStroke();
   fill(255);
   rect(this.cBoxX+this.boxWidth*i, this.y+this.topEdge, this.boxWidth-this.edge, this.cBoxHeight);
+  fill(0);
+  textSize(18);
+  textFont(ttLakesLight);
+  text(`child, ${this.children[i].sex}`, this.cBoxX+this.boxWidth*i, this.y+this.topEdge*0.7);
+  textSize(14);
+  text(`phenotype: ${this.children[i].phenotype}, pattern: ${this.children[i].pattern}`,this.cBoxX+this.boxWidth*i,this.y+this.topEdge-this.inset*2);
   pop();
 }

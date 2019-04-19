@@ -21,13 +21,8 @@ Button.prototype.display = function(){
   pop();
 }
 
-Button.prototype.clicked = function(child){
+Button.prototype.clicked = function(){
   if(mouseX > this.x && mouseX < this.x+this.width && mouseY > this.y && mouseY < this.y+this.heigth){
-    if(child){
-      this.oujabe.breed(mother, father);
-    }
-    else{
-    this.oujabe.generateRandom();
-    }
+    this.oujabe.breed(mother, father);
   }
 }
