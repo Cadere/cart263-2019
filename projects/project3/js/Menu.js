@@ -22,12 +22,12 @@ Menu.prototype.setup = function(){
   let itY = this.y;
   for(let i = 0; i < this.titles.length; i++){
     for(let j = 0; j < this.loci[this.titles[i]].length; j++){
-      let spot =false;
       if(this.titles[i] === "locusS"){
-        spot = true;
+        this.buttons.push(new MenuButton(itX,itY+5,this.buttonSize,this.buttonSize,this.animal,this.loci[this.titles[i]][j],this.titles[i],0,true));
+        this.buttons.push(new MenuButton(itX,itY+25,this.buttonSize,this.buttonSize,this.animal,this.loci[this.titles[i]][j],this.titles[i],1,true));
       }
-      this.buttons.push(new MenuButton(itX,itY+5,this.buttonSize,this.buttonSize,this.animal,this.loci[this.titles[i]][j],this.titles[i],0,spot));
-      this.buttons.push(new MenuButton(itX,itY+25,this.buttonSize,this.buttonSize,this.animal,this.loci[this.titles[i]][j],this.titles[i],1,spot));
+      this.buttons.push(new MenuButton(itX,itY+5,this.buttonSize,this.buttonSize,this.animal,this.loci[this.titles[i]][j],this.titles[i],0));
+      this.buttons.push(new MenuButton(itX,itY+25,this.buttonSize,this.buttonSize,this.animal,this.loci[this.titles[i]][j],this.titles[i],1));
       itX+=20;
     }
     itX+=15;

@@ -9,7 +9,6 @@ function MenuButton(x,y,width,heigth,animal,value,locusName,position,spot){
   this.heigth = heigth;
   this.animal = animal;
   this.locusName = locusName;
-  this.locus = this.animal.genes[this.locusName];
   this.position = position;
   this.spot = spot;
   this.idleFill = "#f4ffed";
@@ -32,7 +31,7 @@ MenuButton.prototype.display = function(){
 
 MenuButton.prototype.clicked = function(){
   if(mouseX > this.x && mouseX < this.x+this.width && mouseY > this.y && mouseY < this.y+this.heigth){
-    this.animal.parametersUpdate(this.locus,this.position,this.value,this.spot);
+    this.animal.parametersUpdate(this.locusName,this.position,this.value,this.spot);
   }
 }
 

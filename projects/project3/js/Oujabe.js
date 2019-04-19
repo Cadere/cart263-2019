@@ -50,9 +50,9 @@ Oujabe.prototype.parametersReset = function(boolean,spot){
 //parametersUpdate();
 //
 //allows the parameters to update dynamically when they are changed through the drop down menu
-Oujabe.prototype.parametersUpdate = function(locus, position, value, spot){
+Oujabe.prototype.parametersUpdate = function(locusName, position, value, spot){
   this.parametersReset(false, spot);
-  locus[position] = value;
+  this.genes[locusName][position] = value;
   this.getPhenotype();
 }
 
