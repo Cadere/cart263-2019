@@ -28,7 +28,11 @@ function Oujabe(){
 //parametersReset();
 //
 //sets the parameters back to the default values
+//this method exists to prevent characteristics stacking instead of replacing eachother
 Oujabe.prototype.parametersReset = function(boolean,spot){
+  //the genes are not emptied unless the boolean is true
+  //this is because i do not want to generate new genes from scractch if I am only changing one
+  //or to empty all the genes when I only change one
   if(boolean){
     this.genes = {};
   }
@@ -41,6 +45,8 @@ Oujabe.prototype.parametersReset = function(boolean,spot){
   this.violet = false;
   this.spot = true;
   this.spotColor;
+  //since spots have two possible patterns for each genotype,
+  //I do not want the selected images to change unless the related locus has been modified
   if(spot){
     this.bodySpots = [];
     this.headSpots = [];
@@ -49,7 +55,7 @@ Oujabe.prototype.parametersReset = function(boolean,spot){
 
 //parametersUpdate();
 //
-//allows the parameters to update dynamically when they are changed through the drop down menu
+//allows the parameters to update dynamically when they are changed through the menu
 Oujabe.prototype.parametersUpdate = function(locusName, position, value, spot){
   this.parametersReset(false, spot);
   this.genes[locusName][position] = value;
@@ -61,23 +67,40 @@ Oujabe.prototype.parametersUpdate = function(locusName, position, value, spot){
 //Creates a brand new oujabe randomly
 Oujabe.prototype.generateRandom = function(mOrF){
   this.parametersReset(true,true);
+  //sex has not yet been implemented as something that matters
   if(!mOrF){
     this.sex = random(sex);
   }
   else{
     this.sex = mOrF;
   }
+  //this makes an array with the names of each object in genetics
   let genesKeys = Object.keys(genetics);
+  //this generates an attribute for each of these keys
+  //and makes it an array of two of the possible values for this key
   for(let i = 0; i < genesKeys.length; i++){
     this.genes[genesKeys[i]] = [random(genetics[genesKeys[i]]), random(genetics[genesKeys[i]])];
   }
+  //this generates the pattern and phenotype strings
   this.getPhenotype();
+  //this makes it so homozygous lethal oujabe will not be generated when creating a random new one
+  if(this.letality){
+    this.generateRandom(mOrF);
+  }
 }
 
+//breed();
+//
+//generates an oujabe from the information of two others
 Oujabe.prototype.breed = function(mother, father){
+  //all parameters are reset
   this.parametersReset(true,true);
+  //sex is attributed randomly
   this.sex = random(sex);
+  //this makes an array with the names of each object in genetics
   let genesKeys = Object.keys(genetics);
+  //this generates an attribute for each of these keys
+  //and makes it an array of one of the mother's genes and one of the father's genes
   for(let i = 0; i < genesKeys.length; i++){
     this.genes[genesKeys[i]] = [random(mother.genes[genesKeys[i]]), random(father.genes[genesKeys[i]])];
   }
@@ -93,6 +116,7 @@ Oujabe.prototype.getPhenotype = function(){
   this.locusF();
   this.locusY();
   this.locusC();
+  //these genes here do not matter if the oujabe is albino
   if(!this.albino){
     this.locusD();
     this.locusB();
@@ -102,6 +126,8 @@ Oujabe.prototype.getPhenotype = function(){
     }
   }
   else{
+    //letality is on the S locus but is still checked if the oujabe is albino
+    //same for spots, so that the display() method does  not attempt to display an image that does not exist
     this.spot = false;
     this.checkLetality;
   }
@@ -318,8 +344,15 @@ Oujabe.prototype.locusS = function(){
 //pickSpots()
 //
 //assigns spot images to the oujabe
+//for each genotype, the oujabe may have one of two images:
+//each of these arrays (ie. sMantle) contain 3 images:
+//one with light spotting, one with medium spotting, and one with heavy spotting
+//if the oujabe has the gene once, it will have either the image with light or medium spotting
+//if the oujabe has the gene twice, it will have either medium or heavy spotting
 Oujabe.prototype.pickSpots = function(){
+  //this generates a value of one or zero
   let value = Math.floor(random(2));
+  //value homo is either 1 or 2
   let valueHomo = value+1;
   if(this.pattern.indexOf("m") !== -1){
     this.bodySpots.push(sMantle[valueHomo]);
@@ -337,6 +370,7 @@ Oujabe.prototype.pickSpots = function(){
     this.bodySpots.push(sSpeckle[value]);
     this.headSpots.push(sHeadSpeckle[value]);
   }
+  //sLeuc is the only array with only two images because "ss" is homozygous lethal
   if(this.pattern.indexOf("s") !== -1){
     this.bodySpots.push(sLeuc[value]);
     this.headSpots.push(sHeadLeuc[value]);
@@ -358,85 +392,80 @@ Oujabe.prototype.checkLetality = function(){
   }
 }
 
-//textGenesAndPhenotype()
-//
-//displays the genes and the phenotypes as text
-//this only exists for this prototype
-Oujabe.prototype.textGenesAndPhenotype = function(name,x,y){
-  push();
-  fill(200);
-  text(name,x,y);
-  text(this.phenotype+" "+this.pattern, x, y+20);
-  let genesKeys = Object.keys(genetics);
-  for(i=0; i < genesKeys.length; i++){
-    text(`${genesKeys[i]}: ${this.genes[genesKeys[i]].toString()}`, x,y+40+20*i);
-  }
-  pop();
-}
-
 //display()
 //
 //this displays the oujabe
 Oujabe.prototype.display = function(x,y){
-  push();
-  tint(this.colorSet[0]);
-  image(body, x, y);
-  noTint();
-  tint(this.colorSet[1]);
-  image(leg, x, y);
-  noTint();
-  tint(this.colorSet[2]);
-  image(stomach, x, y);
-  noTint();
-  if(this.violet){
-    tint(this.colorSet[5]);
-    image(violet, x, y);
-    noTint();
+  if(this.letality){
+    push();
+    textFont(ttLakesBold);
+    fill(this.colorSet[0]);
+    textSize(24);
+    textAlign(CENTER, CENTER);
+    text("THIS ANIMAL WAS STILLBORN", x+250,y+120);
+    pop();
   }
-  if(this.mask){
-    tint(this.colorSet[6]);
-    image(maskLeg, x, y);
+  else{
+    push();
+    tint(this.colorSet[0]);
+    image(body, x, y);
     noTint();
-  }
-  if(this.spot){
-    for (let i = 0; i < this.bodySpots.length; i++){
-      tint(this.spotColor);
-      image(this.bodySpots[i],x,y);
+    tint(this.colorSet[1]);
+    image(leg, x, y);
+    noTint();
+    tint(this.colorSet[2]);
+    image(stomach, x, y);
+    noTint();
+    if(this.violet){
+      tint(this.colorSet[5]);
+      image(violet, x, y);
       noTint();
     }
-  }
-  tint(this.colorSet[3]);
-  image(head, x, y);
-  noTint();
-  tint(this.colorSet[4]);
-  image(accent, x, y);
-  noTint();
-  if(this.mask){
-    tint(this.colorSet[6]);
-    image(mask, x, y);
-    noTint();
-    if(this.spot && this.red){
-      for(let i = 0; i < this.headSpots.length; i++){
-        tint(this.colorSet[3]);
-        image(this.headSpots[i],x,y);
+    if(this.mask){
+      tint(this.colorSet[6]);
+      image(maskLeg, x, y);
+      noTint();
+    }
+    if(this.spot){
+      for (let i = 0; i < this.bodySpots.length; i++){
+        tint(this.spotColor);
+        image(this.bodySpots[i],x,y);
         noTint();
       }
     }
-    image(whiter, x,y);
-  }
-  else{
-    image(whiteR, x, y);
-  }
-  if(this.spot && !this.red){
-    for(let i = 0; i < this.headSpots.length; i++){
-      image(this.headSpots[i],x,y);
+    tint(this.colorSet[3]);
+    image(head, x, y);
+    noTint();
+    tint(this.colorSet[4]);
+    image(accent, x, y);
+    noTint();
+    if(this.mask){
+      tint(this.colorSet[6]);
+      image(mask, x, y);
+      noTint();
+      if(this.spot && this.red){
+        for(let i = 0; i < this.headSpots.length; i++){
+          tint(this.colorSet[3]);
+          image(this.headSpots[i],x,y);
+          noTint();
+        }
+      }
+      image(whiter, x,y);
     }
+    else{
+      image(whiteR, x, y);
+    }
+    if(this.spot && !this.red){
+      for(let i = 0; i < this.headSpots.length; i++){
+        image(this.headSpots[i],x,y);
+      }
+    }
+    tint(this.colorSet[7]);
+    image(hoof, x, y);
+    noTint();
+    tint(this.colorSet[8]);
+    image(eye, x,y);
+    noTint();
+    pop();
   }
-  tint(this.colorSet[7]);
-  image(hoof, x, y);
-  noTint();
-  tint(this.colorSet[8]);
-  image(eye, x,y);
-  noTint();
-  pop();
 }

@@ -16,6 +16,10 @@ function MenuButton(x,y,width,heigth,animal,value,locusName,position,spot){
   this.currentFill = this.idleFill;
 }
 
+//display()
+//
+//displays the button as a square with a letter on it
+//the button is off white if it's unselected and the same color as the oujabe head if it is selected
 MenuButton.prototype.display = function(){
   push();
   fill(this.currentFill);
@@ -29,18 +33,27 @@ MenuButton.prototype.display = function(){
   pop();
 }
 
+//clicked()
+//
+//this function checks if the button has been clicked and calls the proper function
 MenuButton.prototype.clicked = function(){
   if(mouseX > this.x && mouseX < this.x+this.width && mouseY > this.y && mouseY < this.y+this.heigth){
     this.animal.parametersUpdate(this.locusName,this.position,this.value,this.spot);
   }
 }
 
-MenuButton.prototype.resetClicked = function(){
+//newClicked()
+//
+//checks if the button has been clicked and calls the proper function - this one is for buttons that generate a new oujabe
+MenuButton.prototype.newClicked = function(){
   if(mouseX > this.x && mouseX < this.x+this.width && mouseY > this.y && mouseY < this.y+this.heigth){
     this.animal.generateRandom();
   }
 }
 
+//setFill()
+//
+//set fill 
 MenuButton.prototype.setFill = function(){
   this.activeFill = this.animal.colorSet[3];
   if(this.animal.genes[this.locusName][this.position] === this.value){
