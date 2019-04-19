@@ -14,6 +14,8 @@ function MenuButton(x,y,width,heigth,animal,value,locusName,position,spot){
   this.idleFill = "#f4ffed";
   this.activeFill = this.animal.colorSet[3];
   this.currentFill = this.idleFill;
+  this.textFill = 0;
+  this.textSize = 12;
 }
 
 //display()
@@ -27,7 +29,9 @@ MenuButton.prototype.display = function(){
   rect(this.x,this.y,this.width,this.heigth);
   pop();
   push();
-  fill(0);
+  fill(this.textFill);
+  textSize(this.textSize);
+  textLeading(12);
   textAlign(LEFT, TOP);
   text(this.value, this.x+3, this.y);
   pop();
@@ -62,4 +66,13 @@ MenuButton.prototype.setFill = function(){
   else{
     this.currentFill = this.idleFill;
   }
+}
+
+//changeColor()
+//
+//artificially set the button and text color to another color
+MenuButton.prototype.changeStyle = function(buttonFill, textFill, textSize){
+  this.currentFill = buttonFill;
+  this.textFill = textFill;
+  this.textSize = textSize;
 }

@@ -36,7 +36,8 @@ Menu.prototype.setup = function(){
     }
     itX+=15;
   }
-  this.resetButton = new MenuButton(itX-10,itY-5,this.buttonSize,this.buttonSize*3,this.animal,"N\nE\nW");
+  this.resetButton = new MenuButton(itX-10,itY-5,this.buttonSize,this.buttonSize*3,this.animal,"n\ne\nw");
+  this.resetButton.changeStyle("#93a586",255,16);
   this.width = itX - this.x + 25;
 }
 

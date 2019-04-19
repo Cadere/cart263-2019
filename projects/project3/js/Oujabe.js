@@ -95,6 +95,7 @@ Oujabe.prototype.generateRandom = function(mOrF){
 //breed();
 //
 //generates an oujabe from the information of two others
+//letality and sex were not yet implemented as preventing breeding
 Oujabe.prototype.breed = function(mother, father){
   //all parameters are reset
   this.parametersReset(true,true);
