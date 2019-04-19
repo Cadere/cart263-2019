@@ -43,6 +43,7 @@ ChildrenMenu.prototype.setup = function(){
     this.children[i].breed(this.mother, this.father);
     this.buttons.push(new Button(this.cBoxX+this.boxWidth*(i+1)-this.buttonWidth-this.edge, this.y+this.topEdge-this.buttonHeight-this.inset,this.buttonWidth,this.buttonHeight,"new",this.children[i]));
   }
+  this.allButton = new Button(this.width-this.buttonWidth*2, this.y+this.edge, this.buttonWidth*2, this.buttonHeight, " reset all",this.children);
 }
 
 //display()
@@ -60,6 +61,7 @@ ChildrenMenu.prototype.display = function(){
     this.children[i].display(this.cBoxX+this.boxWidth*i+this.inset,this.y+this.topEdge*1.25,this.animalWidth,this.animalHeight);
     this.buttons[i].display();
   }
+  this.allButton.display();
 }
 
 //displayInfoBox()
@@ -103,4 +105,5 @@ ChildrenMenu.prototype.handleImput = function(){
   for(let i = 0; i < this.buttons.length; i++){
     this.buttons[i].clicked();
   }
+  this.allButton.clicked();
 }

@@ -26,7 +26,13 @@ Button.prototype.display = function(){
 
 Button.prototype.clicked = function(){
   if(mouseX > this.x && mouseX < this.x+this.width && mouseY > this.y && mouseY < this.y+this.height){
-    console.log("clicked");
-    this.oujabe.breed(mother, father);
+    if(this.oujabe.length > 1){
+      for(let i = 0; i < this.oujabe.length; i++){
+        this.oujabe[i].breed(mother, father);
+      }
+    }
+    else{
+      this.oujabe.breed(mother,father);
+    }
   }
 }

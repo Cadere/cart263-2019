@@ -23,6 +23,9 @@ function Oujabe(){
   this.spot = true;
   this.bodySpots = [];
   this.headSpots =  [];
+  //parameters for displaying - only set in display
+  this.width;
+  this.height;
 }
 
 //parametersReset();
@@ -399,13 +402,7 @@ Oujabe.prototype.display = function(x,y,width,height){
   //if the oujabe is homozygous lethal, it is not displayed
   //instead text saying "this animal was stillborn" shows
   if(this.letality){
-    push();
-    textFont(ttLakesBold);
-    fill(this.colorSet[0]);
-    textSize(24);
-    textAlign(CENTER, CENTER);
-    text("THIS ANIMAL WAS STILLBORN", x+250,y+120);
-    pop();
+    this.displayLetal(x,y,width,height);
   }
   //the oujabe otherwise displays as normal by repeatedly tinting the image of a body part with the corresponding color
   else{
@@ -468,7 +465,7 @@ Oujabe.prototype.display = function(x,y,width,height){
     //if it has spots but isn'T red, they display here
     //this is because spots do not influence the red of the head: they only affect melanin
     //and the red is not a melanin pigment
-    //the red spots displaying on top of the white facial markings thus looked really weird 
+    //the red spots displaying on top of the white facial markings thus looked really weird
     if(this.spot && !this.red){
       for(let i = 0; i < this.headSpots.length; i++){
         image(this.headSpots[i],x,y,width,height);
@@ -482,4 +479,28 @@ Oujabe.prototype.display = function(x,y,width,height){
     noTint();
     pop();
   }
+}
+
+//displayLetal();
+//
+//set the width and the height for displaying the lethality text properly
+//and then displays the letality text
+Oujabe.prototype.displayLetal = function(x,y,width,height){
+  let sizeOfText  = 24;
+  if(width){
+    this.width = width;
+    this.height = height;
+    sizeOfText = height/10;
+  }
+  else{
+    this.width = body.width;
+    this.height = body.height;
+  }
+  push();
+  textFont(ttLakesBold);
+  fill(this.colorSet[0]);
+  textSize(sizeOfText);
+  textAlign(CENTER, CENTER);
+  text("THIS ANIMAL WAS STILLBORN", x+this.width/2,y+this.height/2);
+  pop();
 }

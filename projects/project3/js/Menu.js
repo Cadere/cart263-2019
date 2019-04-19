@@ -10,6 +10,7 @@ function Menu(animal, loci, x, y, name){
   this.y = y;
   this.name = name;
   this.bgFill = "#c3e0af";
+  this.boxFill = "";
   this.buttons = [];
   this.resetButton;
   this.buttonSize = 15;
