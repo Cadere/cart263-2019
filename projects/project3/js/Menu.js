@@ -1,7 +1,7 @@
 //Menu constructor
 //
 //The menu is used to manually change genes for an oujabe
-
+//or to generate a new one
 function Menu(animal, loci, x, y, name){
   this.animal = animal;
   this.loci = loci;
@@ -16,6 +16,9 @@ function Menu(animal, loci, x, y, name){
   this.heigth = 400;
   this.width;
 }
+
+//this constructs the buttons for the Menu
+//the button's parameters are the following
 //x,y,width,heigth,animal,locus,position,value,spot
 Menu.prototype.setup = function(){
   let itX = this.x;

@@ -53,7 +53,7 @@ MenuButton.prototype.newClicked = function(){
 
 //setFill()
 //
-//set fill 
+//set currentFill to either the head color of the animal or the idleFill (off white)
 MenuButton.prototype.setFill = function(){
   this.activeFill = this.animal.colorSet[3];
   if(this.animal.genes[this.locusName][this.position] === this.value){
