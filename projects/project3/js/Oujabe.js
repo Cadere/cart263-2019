@@ -395,7 +395,9 @@ Oujabe.prototype.checkLetality = function(){
 //display()
 //
 //this displays the oujabe
-Oujabe.prototype.display = function(x,y){
+Oujabe.prototype.display = function(x,y,width,height){
+  //if the oujabe is homozygous lethal, it is not displayed
+  //instead text saying "this animal was stillborn" shows
   if(this.letality){
     push();
     textFont(ttLakesBold);
@@ -405,66 +407,78 @@ Oujabe.prototype.display = function(x,y){
     text("THIS ANIMAL WAS STILLBORN", x+250,y+120);
     pop();
   }
+  //the oujabe otherwise displays as normal by repeatedly tinting the image of a body part with the corresponding color
   else{
     push();
     tint(this.colorSet[0]);
-    image(body, x, y);
+    image(body, x, y,width,height);
     noTint();
     tint(this.colorSet[1]);
-    image(leg, x, y);
+    image(leg, x, y,width,height);
     noTint();
     tint(this.colorSet[2]);
-    image(stomach, x, y);
+    image(stomach, x, y,width,height);
     noTint();
+    //if the oujabe is violet, it has a darker spot on the rump
     if(this.violet){
       tint(this.colorSet[5]);
-      image(violet, x, y);
+      image(violet, x, y,width,height);
       noTint();
     }
+    //this displays the mask on the legs
     if(this.mask){
       tint(this.colorSet[6]);
-      image(maskLeg, x, y);
+      image(maskLeg, x, y,width,height);
       noTint();
     }
+    //this displays the spots on the body
     if(this.spot){
       for (let i = 0; i < this.bodySpots.length; i++){
         tint(this.spotColor);
-        image(this.bodySpots[i],x,y);
+        image(this.bodySpots[i],x,y,width,height);
         noTint();
       }
     }
     tint(this.colorSet[3]);
-    image(head, x, y);
+    image(head, x, y,width,height);
     noTint();
     tint(this.colorSet[4]);
-    image(accent, x, y);
+    image(accent, x, y,width,height);
     noTint();
+    //this displays the mask on the head
     if(this.mask){
       tint(this.colorSet[6]);
-      image(mask, x, y);
+      image(mask, x, y,width,height);
       noTint();
+      //if the oujabe is spotted and red, the spots are displayed here and tinted
       if(this.spot && this.red){
         for(let i = 0; i < this.headSpots.length; i++){
           tint(this.colorSet[3]);
-          image(this.headSpots[i],x,y);
+          image(this.headSpots[i],x,y,width,height);
           noTint();
         }
       }
-      image(whiter, x,y);
+      //if the oujabe has a mask, it displays the proper white marking
+      image(whiter, x,y,width,height);
     }
+    //if the oujabe has no mask, it displays the other white marking
     else{
-      image(whiteR, x, y);
+      image(whiteR, x, y,width,height);
     }
+    //if it has spots but isn'T red, they display here
+    //this is because spots do not influence the red of the head: they only affect melanin
+    //and the red is not a melanin pigment
+    //the red spots displaying on top of the white facial markings thus looked really weird 
     if(this.spot && !this.red){
       for(let i = 0; i < this.headSpots.length; i++){
-        image(this.headSpots[i],x,y);
+        image(this.headSpots[i],x,y,width,height);
       }
     }
     tint(this.colorSet[7]);
-    image(hoof, x, y);
+    image(hoof, x, y,width,height);
     noTint();
     tint(this.colorSet[8]);
-    image(eye, x,y);
+    image(eye, x,y,width,height);
     noTint();
     pop();
   }
