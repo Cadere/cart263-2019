@@ -126,7 +126,8 @@ function setup(){
   motherMenu.setup();
   fatherMenu = new Menu(father, loci, 585,50,"father");
   fatherMenu.setup();
-  childrenMenu = new ChildrenMenu(15, 435);
+  childrenMenu = new ChildrenMenu(15, 435, mother, father);
+  childrenMenu.setup();
 }
 
 function draw(){
@@ -138,21 +139,7 @@ function draw(){
   father.display(600,110);
   child.display(40,450);
   childrenMenu.display();
-  explanation();
   childButton.display();
-}
-
-function explanation(){
-  let explanation = `PHENOTYPE, PATTERN
-Locus R determines if the head is red or blue;
-Locus F determines the density of yellow and red pigments;
-Locus Y can dilute the amount of melanin;
-Locus C can dilute the amount of melanin,
-  It is also the locus for a violet tint and for albinism;
-Locus D is the locus of hypermelanism;
-Locus B determines if there is a black mask;
-Locus S is not yet implemented.`
-  text(explanation, 515, 450);
 }
 
 function mouseClicked(){
