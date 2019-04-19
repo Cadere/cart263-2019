@@ -100,7 +100,6 @@ ChildrenMenu.prototype.displayChildBox = function(i){
 }
 
 ChildrenMenu.prototype.handleImput = function(){
-  console.log("handleImput")
   for(let i = 0; i < this.buttons.length; i++){
     this.buttons[i].clicked();
   }
