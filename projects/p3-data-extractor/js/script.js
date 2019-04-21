@@ -92,6 +92,14 @@ function imagesAllLoaded(){
   }
 }
 
+//it should be noted that the JSON production here is not entirely perfect
+//as it leave an extra comma after the last object
+//I opted not to fix this because while I was still trying to make sure everything worked 
+//and that nothing had a wrong name or similar problem
+//the extra comma was superbly useful in helping me see really fast if I had, actually, pasted the new JSON file 
+//over the version I was trying to replace
+//in order to fix this I would add a counter that would increment for each set of pixels
+//and only add the comma if this counter is <pictures.length*phenotype.length
 function analyseImages(){
   //basically this program is trying to build a json file in a kinda ugly way
   let futureJSON = "{\n"
@@ -130,6 +138,8 @@ function analyseImages(){
   console.log(futureJSON);
 }
 
+//got these two functions off stackexchange
+//this one converts a single number to hex
 function rgbToHex(rgb) {
   let hex = Number(rgb).toString(16);
   if (hex.length < 2) {
@@ -138,6 +148,7 @@ function rgbToHex(rgb) {
   return hex;
 };
 
+//this one assembles the hex values to make a full hex code
 function fullColorHex(r,g,b){
   var red = rgbToHex(r);
   var green = rgbToHex(g);
